@@ -1,0 +1,24 @@
+<h3>店舗一覧</h3>
+<div class="row">
+  <div class="container mt-4">
+    <div class="row w-100">
+      <% @shops.each do |shop| %>
+      <% if shop.del_flg != 1 %>
+      <div class="col-3">
+        <% if shop.image? %>
+        <%= link_to s_show_path(shop) do %>
+        <%= image_tag shop.image.url, class: 'img-thumbnail' %>
+        <% end %>
+        <% end %>
+        <div class="row">
+          <div class="col-12">
+            <p class="mt-2"><%= shop.name %></p>
+            <%= link_to "店舗詳細", s_show_path(shop) %>
+          </div>
+        </div>
+      </div>
+      <% end %>
+      <% end %>
+    </div>
+  </div>
+</div>

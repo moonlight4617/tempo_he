@@ -1,0 +1,16 @@
+// Place all the styles related to the Messages controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+.message {
+  list-style: none;
+  position: relative;
+  margin: 10px;
+  padding: 10px;
+  width: auto;
+  border-radius: 12px;
+  background: #edf1ee;
+}
+
+.sender {
+  text-align: right;
+}

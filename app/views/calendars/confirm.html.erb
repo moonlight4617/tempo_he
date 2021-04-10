@@ -1,0 +1,18 @@
+<h3>確認</h3>
+<% @reservation_days = [] %>
+<% @candidate_days.each.with_index do |day, i| %>
+<% splited_day = day.split %>
+<% splited_day[0].slice!(-1)%>
+<% time = Time.parse(splited_day[1]) %>
+<h4><%= "候補#{i+1}" %></h4>
+<li>日付：<%= splited_day[0] %></li>
+<li>時刻：<%= time.strftime("%H:%M") %></li>
+<% @reservation_days.push(splited_day[0]) %>
+<% @reservation_days.push(splited_day[1]) %>
+<% end %>
+<%= form_for(:calendar, url: {controller: 'calendars', action: 'create'}) do |f| %>
+<%= f.hidden_field :candidate_days, value: @reservation_days %>
+<%= f.submit "上記の日時で申し込む"%>
+<% end %>
+<%= button_to "日時選択画面へ戻る", c_new_path, method: :get %>
+<%= link_to "店舗に質問を送る", ch_show_path %>

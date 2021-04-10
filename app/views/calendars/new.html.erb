@@ -1,0 +1,44 @@
+<div class="table">
+  <%= form_for(:calendar, url:{controller: 'calendars', action: 'confirm' }, html: {method: 'GET'}) do |f| %>
+  <table>
+    <thead>
+      <tr class="thead-dark">
+        <th>
+          <% if @t.first.to_date > Date.today%>
+          <%= f.submit "前の週へ", :name => 'prev' %>
+          <% end %>
+        </th>
+        <th colspan=6 class="text-center"><%= @year_month %></th>
+        <th>
+          <%= f.hidden_field :day, value: @today %>
+          <%= f.submit "次の週へ", :name => 'next'%>
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+
+      <tr class="thead-light">
+        <th></th>
+        <% @week.each do |day| %>
+        <th class="text-center"><%= day.mday %><%= "(" + %w[日 月 火 水 木 金 土][day.wday] + ")" %></th>
+        <% end %>
+      </tr>
+      <% @able_time.each do |hour| %>
+      <tr>
+        <th><%= hour %>:00</th>
+        <% 7.times do %>
+        <% cal_date = @t.slice!(0)%>
+        <% if !@available.include?(cal_date) || @rentDays.include?(cal_date) %>
+        <td class="text-center">x</td>
+        <% else %>
+        <td class="text-center"><%= f.check_box :rent_date, {multiple: true}, cal_date, nil %></td>
+        <% end%>
+        <% end %>
+        <% end %>
+      </tr>
+    </tbody>
+  </table>
+  <%= f.submit "確認画面へ" %>
+  <% end%>
+  <%= link_to "店舗に質問を送る", ch_show_path %>
+</div>

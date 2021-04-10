@@ -1,0 +1,6 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+owner_ryoji:
+  name: Owner_Ryoji Example
+  email: ryoji@example.com
+  password_digest: <%= Owner.digest('password') %>

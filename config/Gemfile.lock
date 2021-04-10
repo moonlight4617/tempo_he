@@ -1,0 +1,16 @@
+GEM
+  specs:
+    kgio (2.11.3)
+    raindrops (0.19.1)
+    unicorn (5.8.0)
+      kgio (~> 2.6)
+      raindrops (~> 0.7)
+
+PLATFORMS
+  x86_64-linux
+
+DEPENDENCIES
+  unicorn
+
+BUNDLED WITH
+   2.2.9

@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  start_time: 2021-01-22 09:30:15
+  end_time: 2021-01-22 09:30:15
+  rent_date: 2021-01-22
+  shop: one
+
+two:
+  start_time: 2021-01-22 09:30:15
+  end_time: 2021-01-22 09:30:15
+  rent_date: 2021-01-22
+  shop: two

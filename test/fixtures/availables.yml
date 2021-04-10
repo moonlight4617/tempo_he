@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  rent_date: MyString
+  start_time: MyString
+  shop: one
+
+two:
+  rent_date: MyString
+  start_time: MyString
+  shop: two

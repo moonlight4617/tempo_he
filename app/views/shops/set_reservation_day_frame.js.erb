@@ -1,0 +1,3 @@
+$("#register").find(".modal").modal("hide");
+$('body').removeClass('modal-open');
+$(".table").html("<%= j(render partial: 'calendar', locals: { available_days: @available_days}) %>");

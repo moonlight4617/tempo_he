@@ -1,0 +1,9 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+sample_shop:
+  name: Sample_shop
+  zip_code: 188-0013
+  prefecture: "東京都"
+  city: "西東京市"
+  tel: 03-1234-5678
+  station: "西東京駅"

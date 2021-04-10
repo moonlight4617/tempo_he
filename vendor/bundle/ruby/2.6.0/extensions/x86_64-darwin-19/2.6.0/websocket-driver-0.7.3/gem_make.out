@@ -1,0 +1,15 @@
+current directory: /Users/tanaberyouni/Desktop/web/PF/tempo/vendor/bundle/ruby/2.6.0/gems/websocket-driver-0.7.3/ext/websocket-driver
+/Users/tanaberyouni/.rbenv/versions/2.6.2/bin/ruby -I /Users/tanaberyouni/.rbenv/versions/2.6.2/lib/ruby/2.6.0 -r ./siteconf20210210-51869-absh5i.rb extconf.rb
+creating Makefile
+
+current directory: /Users/tanaberyouni/Desktop/web/PF/tempo/vendor/bundle/ruby/2.6.0/gems/websocket-driver-0.7.3/ext/websocket-driver
+make "DESTDIR=" clean
+
+current directory: /Users/tanaberyouni/Desktop/web/PF/tempo/vendor/bundle/ruby/2.6.0/gems/websocket-driver-0.7.3/ext/websocket-driver
+make "DESTDIR="
+compiling websocket_mask.c
+linking shared-object websocket_mask.bundle
+
+current directory: /Users/tanaberyouni/Desktop/web/PF/tempo/vendor/bundle/ruby/2.6.0/gems/websocket-driver-0.7.3/ext/websocket-driver
+make "DESTDIR=" install
+/usr/bin/install -c -m 0755 websocket_mask.bundle ./.gem.20210210-51869-6ktkxw

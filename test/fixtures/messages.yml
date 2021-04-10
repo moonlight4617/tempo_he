@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  content: MyText
+  fin_flg: 1
+  del_flg: 1
+  chat: one
+
+two:
+  content: MyText
+  fin_flg: 1
+  del_flg: 1
+  chat: two

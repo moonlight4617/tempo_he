@@ -1,0 +1,11 @@
+<h3><%= @user.name %>への連絡</h3>
+<div class="contents">
+  <div class="js-message-errors"></div>
+  <%= render partial: 'message'%>
+  <%= form_with(model: @message, class: 'js-form', url: ch_msg_shop_path) do |f| %>
+  <%= f.hidden_field :user, :value => @user.public_uid %>
+  <%= f.label :content, "内容" %>
+  <%= f.text_area :content, class: "form-control", id: "message_text" %>
+  <%= f.submit "送信", class: "btn btn-primary btn-lg btn-block", id: "submit"%>
+  <% end %>
+</div>

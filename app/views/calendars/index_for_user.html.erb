@@ -1,0 +1,10 @@
+<h3>予約日時</h3>
+
+<% @calendars.each.with_index do |cal, i| %>
+<p>予約<%= i + 1 %></p>
+<ul>
+  <li>店舗：<%= link_to cal.shop.name, s_show_path(cal.shop)%></li>
+  <li>日付：<%= cal.rent_date %></li>
+  <li>開始時刻：<%= cal.start_time %></li>
+</ul>
+<% end %>

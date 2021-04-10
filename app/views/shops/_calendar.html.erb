@@ -1,0 +1,38 @@
+<div class="js-message-errors"></div>
+<table>
+  <thead>
+    <tr class="thead-dark">
+      <th>
+        <% session[:day] = @available_days %>
+        <% if @t.first.to_date > Date.today%>
+        <%= link_to "前の週へ", s_prev_path(@shop, today:@today, day:available_days) %>
+        <% end %>
+      </th>
+      <th colspan=6 class="text-center"><%= @year_month %></th>
+      <th>
+        <%= link_to "次の週へ", s_next_path(@shop, today:@today, day:available_days) %>
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr class="thead-light">
+      <th></th>
+      <% @week.each do |day| %>
+      <th class="text-center"><%= day.mday %><%= "(" + %w[日 月 火 水 木 金 土][day.wday] + ")" %></th>
+      <% end %>
+    </tr>
+    <% @able_time.each do |hour| %>
+    <tr>
+      <th id="calender_body"><%= hour %>:00</th>
+      <% 7.times do %>
+      <% cal_date = @t.slice!(0)%>
+      <% if available_days && available_days.include?(cal_date) %>
+      <td class="text-center">○</td>
+      <% else %>
+      <td class="text-center">x</td>
+      <% end%>
+      <% end %>
+      <% end %>
+    </tr>
+  </tbody>
+</table>

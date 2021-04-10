@@ -1,0 +1,63 @@
+<div class="modal fade" id="registerModal" tabindex="-1" role="dialog" aria-labelledby="goalModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+
+      <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+        <li class="nav-item">
+          <a class="nav-link active" id="pills-open-tab" data-toggle="pill" href="#pills-open" role="tab" aria-controls="pills-open" aria-selected="true">予約開放</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" id="pills-close-tab" data-toggle="pill" href="#pills-close" role="tab" aria-controls="pills-close" aria-selected="false">予約閉鎖</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" id="pills-day-tab" data-toggle="pill" href="#pills-day" role="tab" aria-controls="pills-day" aria-selected="false">曜日開放</a>
+        </li>
+      </ul>
+      <div class="tab-content" id="pills-tabContent">
+        <div class="tab-pane fade show active" id="pills-open" role="tabpanel" aria-labelledby="pills-open-tab">
+          <p>予約を受けつける日時を選択してください</p>
+          <%= form_with(model: @shops, url: s_set_res_path, class: 'js-form') do |f| %>
+          <%= f.date_field :rent_date%>
+          <%= f.select :start_time, [["01:00", "01"], ["02:00", "02"], ["03:00", "03"], ["04:00", "04"], ["05:00", "05"], ["06:00", "06"], ["07:00", "07"], ["08:00", "08"], ["09:00", "09"], ["10:00", "10"], ["11:00", "11"], ["12:00", "12"], ["13:00", "13"], ["14:00", "14"], ["15:00", "15"], ["16:00", "16"], ["17:00", "17"], ["18:00", "18"], ["19:00", "19"], ["20:00", "20"], ["21:00", "21"], ["22:00", "22"], ["23:00", "23"], ["24:00", "24"]], include_blank: "選択して下さい", class: 'start_time' %>
+          <%= f.label :start_time, "開始時間" %>
+          <%= f.select :end_time, [["01:00", "01"], ["02:00", "02"], ["03:00", "03"], ["04:00", "04"], ["05:00", "05"], ["06:00", "06"], ["07:00", "07"], ["08:00", "08"], ["09:00", "09"], ["10:00", "10"], ["11:00", "11"], ["12:00", "12"], ["13:00", "13"], ["14:00", "14"], ["15:00", "15"], ["16:00", "16"], ["17:00", "17"], ["18:00", "18"], ["19:00", "19"], ["20:00", "20"], ["21:00", "21"], ["22:00", "22"], ["23:00", "23"], ["24:00", "24"]], include_blank: "選択して下さい", class: 'end_time' %>
+          <%= f.label :end_time, "終了時間" %>
+          <%= f.submit '追加'%>
+          <%end%>
+        </div>
+        <div class="tab-pane fade" id="pills-close" role="tabpanel" aria-labelledby="pills-close-tab">
+          <p>予約を受けつけない日時を選択してください</p>
+          <%= form_with(model: @shops, url: s_remove_res_path, class: 'js-form', method: 'delete') do |f| %>
+          <%= f.date_field :rent_date%>
+          <%= f.select :start_time, [["01:00", "01"], ["02:00", "02"], ["03:00", "03"], ["04:00", "04"], ["05:00", "05"], ["06:00", "06"], ["07:00", "07"], ["08:00", "08"], ["09:00", "09"], ["10:00", "10"], ["11:00", "11"], ["12:00", "12"], ["13:00", "13"], ["14:00", "14"], ["15:00", "15"], ["16:00", "16"], ["17:00", "17"], ["18:00", "18"], ["19:00", "19"], ["20:00", "20"], ["21:00", "21"], ["22:00", "22"], ["23:00", "23"], ["24:00", "24"]], include_blank: "選択して下さい", class: 'start_time' %>
+          <%= f.label :start_time, "開始時間" %>
+          <%= f.select :end_time, [["01:00", "01"], ["02:00", "02"], ["03:00", "03"], ["04:00", "04"], ["05:00", "05"], ["06:00", "06"], ["07:00", "07"], ["08:00", "08"], ["09:00", "09"], ["10:00", "10"], ["11:00", "11"], ["12:00", "12"], ["13:00", "13"], ["14:00", "14"], ["15:00", "15"], ["16:00", "16"], ["17:00", "17"], ["18:00", "18"], ["19:00", "19"], ["20:00", "20"], ["21:00", "21"], ["22:00", "22"], ["23:00", "23"], ["24:00", "24"]], include_blank: "選択して下さい", class: 'end_time' %>
+          <%= f.label :end_time, "終了時間" %>
+          <%= f.submit '追加'%>
+          <%end%>
+        </div>
+        <div class="tab-pane fade" id="pills-day" role="tabpanel" aria-labelledby="pills-day-tab">
+          <p>一定期間、曜日ごとに開放する時間を選択してください</p>
+          <%= form_with(model: @shops, url: s_day_res_path, class: 'js-form') do |f| %>
+          期間
+          <%= f.date_field :rent_start%>〜
+          <%= f.date_field :rent_end%><br>
+          時間
+          <%= f.select :start_time, [["01:00", "01"], ["02:00", "02"], ["03:00", "03"], ["04:00", "04"], ["05:00", "05"], ["06:00", "06"], ["07:00", "07"], ["08:00", "08"], ["09:00", "09"], ["10:00", "10"], ["11:00", "11"], ["12:00", "12"], ["13:00", "13"], ["14:00", "14"], ["15:00", "15"], ["16:00", "16"], ["17:00", "17"], ["18:00", "18"], ["19:00", "19"], ["20:00", "20"], ["21:00", "21"], ["22:00", "22"], ["23:00", "23"], ["24:00", "24"]], include_blank: "選択して下さい", class: 'start_time' %>〜
+          <%= f.select :end_time, [["01:00", "01"], ["02:00", "02"], ["03:00", "03"], ["04:00", "04"], ["05:00", "05"], ["06:00", "06"], ["07:00", "07"], ["08:00", "08"], ["09:00", "09"], ["10:00", "10"], ["11:00", "11"], ["12:00", "12"], ["13:00", "13"], ["14:00", "14"], ["15:00", "15"], ["16:00", "16"], ["17:00", "17"], ["18:00", "18"], ["19:00", "19"], ["20:00", "20"], ["21:00", "21"], ["22:00", "22"], ["23:00", "23"], ["24:00", "24"]], include_blank: "選択して下さい", class: 'end_time' %><br>
+          <%= f.check_box :day, {multiple: true}, 0, nil %>日
+          <%= f.check_box :day, {multiple: true}, 1, nil %>月
+          <%= f.check_box :day, {multiple: true}, 2, nil %>火
+          <%= f.check_box :day, {multiple: true}, 3, nil %>水
+          <%= f.check_box :day, {multiple: true}, 4, nil %>木
+          <%= f.check_box :day, {multiple: true}, 5, nil %>金
+          <%= f.check_box :day, {multiple: true}, 6, nil %>土
+          <%= f.submit '追加'%>
+          <%end%>
+        </div>
+      </div>
+
+
+    </div>
+  </div>
+</div>

@@ -1,0 +1,26 @@
+<h3>マイアカウント</h3>
+<% @shops.each do |shop| %>
+<% if shop.del_flg != 1 %>
+<div colspan=6>
+  <%= shop.name %>
+  <% if shop.image? %>
+  <%= image_tag shop.image.url %><br>
+  <% end %>
+  <p>予約一覧</p>
+  <% calendars = Calendar.where(shop_id: shop.id , rent_date: Date.today..Float::INFINITY)%>
+  <% calendars.each do |cal|%>
+  <ul>
+    <li>日付：<%= cal.rent_date %>時間：<%= cal.start_time %></li>
+    <p>
+      <%= link_to "予約者：#{cal.user.name}", u_show_path %><br>
+      <%= link_to "メッセージを送信する", ch_show_owner_path(shop.id, user: User.find(cal.user_id).public_uid) %>
+    </p>
+  </ul>
+  <% end %>
+  <%= link_to "店舗詳細", s_show_path(shop) %><br>
+  <%= link_to "メッセージ", ch_index_owner_path(shop) %><br>
+  <% end %>
+  <% end %>
+</div>
+<%= link_to "新しく店舗を登録する", s_new_path %><br>
+<%= link_to "オーナーアカウントの削除", o_destroy_path, method: "patch" ,data: { confirm: "一度アカウントを削除すると、元に戻せません。本当にアカウントそのものを削除しますか？" } %>

@@ -1,0 +1,12 @@
+<ul class="messages">
+  <% if @messages != nil %>
+  <% @messages.each do |message| %>
+  <li class="message"><%= message.content %><br>
+    <div class="sender">
+      <%= message.sender %> -
+      <%= message.created_at.strftime('%m/%d %H:%M')%>
+    </div>
+  </li>
+  <% end %>
+  <% end %>
+</ul>

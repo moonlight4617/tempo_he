@@ -1,0 +1,18 @@
+<div class="form-signin">
+  <div class="py-5 text-center">
+    <h3 class="mb-3 font-weight-normal">ログイン</h3>
+  </div>
+  <%= form_for(:user_session, url: {controller: 'user_sessions', action: 'create'}) do |f| %>
+  <form class="form-group row">
+    <%= f.label :email, class: "sr-only" %>Eメール
+    <%= f.text_field :email , id: "inputEmail", class: "form-control" %><br>
+    <%= f.label :password, class: "sr-only" %>パスワード
+    <%= f.password_field :password, id: "inputPassword", class: "form-control"%><br>
+    <%= f.check_box :remember_me, class: "checkbox mb-3"%>
+    <%= f.label :remember_me, "次回から自動でログインする" %><br>
+    <%= f.submit label="ログイン", class: "btn btn-lg btn-primary btn-block" %>
+    <% end %>
+  </form>
+  <p class="mt-3"><%= link_to "新規会員登録へ", u_new_path %></p>
+  <p class="mt-3"><%= link_to "サンプルユーザーとしてログイン", sample_user_path, method: 'post' %></p>
+</div>

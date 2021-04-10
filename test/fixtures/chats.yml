@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  room_name: MyString
+  application_flg: 1
+  shop: one
+  user: one
+
+two:
+  room_name: MyString
+  application_flg: 1
+  shop: two
+  user: two

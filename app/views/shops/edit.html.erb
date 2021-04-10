@@ -1,0 +1,72 @@
+<div class="container">
+  <h3 class="text-center">店舗編集</h3>
+  <div class="form-group">
+    <%= form_for(@shop, url: {controller: 'shops', action: 'update'}) do |f| %>
+    <%= render '/layouts/error_messages' %>
+    <%= f.label :name, "店舗名" %><span class="required"> *必須項目</span>
+    <%= f.text_field :name, class: "form-control" %><br>
+    <%= f.label :zip_code, "郵便番号" %><span class="required"> *必須項目</span>
+    <%= f.text_field :zip_code, id:'zip_code'%>
+    <button type="button" id='search'>住所自動入力</button><br>
+    <%= f.label :prefecture, "都道府県" %><span class="required"> *必須項目</span>
+    <%= f.text_field :prefecture, class: "form-control", id: "pref_name" %><br>
+    <%= f.label :city, "市町村" %><span class="required"> *必須項目</span>
+    <%= f.text_field :city, class: "form-control", id: "city" %><br>
+    <%= f.label :address, "番地以下の住所" %>
+    <%= f.text_field :address, class: "form-control", id: "other" %><br>
+    <%= f.label :tel, "電話番号" %><span class="required"> *必須項目</span>
+    <%= f.text_field :tel, class: "form-control" %><br>
+    <%= f.label :station, "最寄り駅" %><span class="required"> *必須項目</span>
+    <%= f.text_field :station, class: "form-control" %><br>
+    <%= f.label :capacity, "最大席数" %>
+    <%= f.text_field :capacity, class: "form-control" %><br>
+    <%= f.label :price, "基本料金/h" %>
+    <%= f.text_field :price, class: "form-control" %><br>
+    <%= f.label :start_time, "開始時間" %>
+    <%= f.select :start_time,[["0:00", 0], ["1:00", 1], ["2:00", 2], ["3:00", 3], ["4:00", 4], ["5:00", 5], ["6:00", 6], ["7:00", 7], ["8:00", 8], ["9:00", 9], ["10:00", 10], ["11:00", 11], ["12:00", 12], ["13:00", 13], ["14:00", 14], ["15:00", 15], ["16:00", 16], ["17:00", 17], ["18:00", 18], ["19:00", 19], ["20:00", 20], ["21:00", 21], ["22:00", 22], ["23:00", 23], ["24:00", 24]], include_blank: "選択してください" %>
+    <%= f.label :end_time, "終了時間" %>
+    <%= f.select :end_time,[["0:00", 0], ["1:00", 1], ["2:00", 2], ["3:00", 3], ["4:00", 4], ["5:00", 5], ["6:00", 6], ["7:00", 7], ["8:00", 8], ["9:00", 9], ["10:00", 10], ["11:00", 11], ["12:00", 12], ["13:00", 13], ["14:00", 14], ["15:00", 15], ["16:00", 16], ["17:00", 17], ["18:00", 18], ["19:00", 19], ["20:00", 20], ["21:00", 21], ["22:00", 22], ["23:00", 23], ["24:00", 24]], include_blank: "選択してください" %><br>
+    <%= f.label :content, "詳細説明" %>
+    <%= f.text_area :content, class: "form-control" %><br>
+    <%= f.label :image, "画像" %>
+    <%= f.file_field :image , class: "mb-4" %><br>
+    <%= f.submit label='登録', class: "btn btn-primary btn-lg btn-block" %>
+    <% end %>
+  </div>
+</div>
+
+<script>
+  $(function() {
+    $("#search").click(function(e) {
+      e.preventDefault();
+      var param = {
+        zipcode: $('#zip_code').val()
+      }
+      var send_url = "http://zipcloud.ibsnet.co.jp/api/search";
+      $.ajax({
+        type: "GET",
+        cache: false,
+        data: param,
+        url: send_url,
+        dataType: "jsonp",
+        success: function(res) {
+          if (res.status == 200) {
+            var html = '';
+            // for (var i = 0; i < res.results.length; i++) {
+            var result = res.results[0];
+            $('#pref_name').val(result.address1);
+            $('#city').val(result.address2);
+            $('#other').val(result.address3);
+            // }
+            console.log(res.results);
+          } else {
+            $('#zip_result').html(res.message);
+          }
+        },
+        error: function(XMLHttpRequest, textStatus, errorThrown) {
+          console.log(XMLHttpRequest);
+        }
+      });
+    });
+  });
+</script>
