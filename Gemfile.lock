@@ -150,13 +150,12 @@ GEM
     mysql2 (0.5.3)
     nenv (0.3.0)
     nio4r (2.5.7)
-    nokogiri (1.11.4)
+    nokogiri (1.11.5)
       mini_portile2 (~> 2.5.0)
       racc (~> 1.4)
     notiffany (0.1.3)
       nenv (~> 0.1)
       shellany (~> 0.0)
-    pg (1.2.3)
     popper_js (2.9.2)
     pry (0.14.1)
       coderay (~> 1.1)
@@ -290,7 +289,6 @@ DEPENDENCIES
   minitest
   minitest-reporters
   mysql2 (= 0.5.3)
-  pg
   pry-rails
   public_uid
   puma (~> 3.11)
