@@ -32,3 +32,6 @@ production:
   <<: *default
   database: tempo_heroku_production
   password: Tempo_user1
+  adapter: postgresql
+  user: root
+  password:
