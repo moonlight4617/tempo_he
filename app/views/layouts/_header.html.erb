@@ -1,47 +1,56 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <div class="container-fluid">
+    <%= link_to "tempo", root_path, class: "navbar-brand"%>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
 
-  <%= link_to "tempo", root_path, class: "navbar-brand"%>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
+    <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+      <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+        <li class="nav-item">
+          <%= link_to "店舗一覧", s_index_path, class: 'nav-link' %><span class="sr-only">(current)</span></a>
+        </li>
+        <% if session[:owner_id] == nil %>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            ユーザーメニュー
+          </a>
 
-  <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
-    <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-      <li class="nav-item">
-        <%= link_to "店舗一覧", s_index_path, class: 'nav-link' %><span class="sr-only">(current)</span></a>
-      </li>
-      <% if session[:owner_id] == nil %>
-      <li class="nav-item dropdown">
-        <%= link_to "ユーザーメニュー", "", class: "nav-link dropdown-toggle", id: "navbarDropdownMenuLink", role: "button", :data => {:toggle=>"dropdown"}, :aria => {:haspopup=>"true", :expanded=>"false"} %>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-          <% if session[:user_id] %>
-          <%= link_to "マイアカウント", u_show_path, class: "dropdown-item" %>
-          <%= link_to "予約一覧", c_index_path, class: "dropdown-item" %>
-          <%= link_to "ログアウト", user_logout_path, method: :delete, class: "dropdown-item" %>
-          <% else %>
-          <%= link_to "ログイン", user_login_path, class: "dropdown-item" %>
-          <%= link_to "新規会員登録", u_new_path, class: "dropdown-item" %>
-          <%= link_to "サンプルユーザーとしてログイン", sample_user_path, class: "dropdown-item", method: 'post' %>
-          <% end %>
-        </div>
-      </li>
-      <% end %>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+            <% if session[:user_id] %>
+            <%= link_to "マイアカウント", u_show_path, class: "dropdown-item" %>
+            <%= link_to "予約一覧", c_index_path, class: "dropdown-item" %>
+            <%= link_to "ログアウト", user_logout_path, method: :delete, class: "dropdown-item" %>
+            <% else %>
+            <%= link_to "ログイン", user_login_path, class: "dropdown-item" %>
+            <%= link_to "新規会員登録", u_new_path, class: "dropdown-item" %>
+            <%= link_to "サンプルユーザーとしてログイン", sample_user_path, class: "dropdown-item", method: 'post' %>
+            <% end %>
+          </div>
+        </li>
+        <% end %>
 
-      <% if session[:user_id] == nil %>
-      <li class="nav-item dropdown">
-        <%= link_to "オーナーメニュー", "", class: "nav-link dropdown-toggle", id: "navbarDropdownMenuLink", role: "button", :data => {:toggle=>"dropdown"}, :aria => {:haspopup=>"true", :expanded=>"false"} %>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-          <% if session[:owner_id] %>
-          <%= link_to "マイアカウント", o_show_path, class: "dropdown-item" %>
-          <%= link_to "ログアウト", owner_logout_path, method: :delete, class: "dropdown-item" %>
-          <% else %>
-          <%= link_to "ログイン", owner_login_path, class: "dropdown-item" %>
-          <%= link_to "新規会員登録", o_new_path, class: "dropdown-item" %>
-          <%= link_to "サンプルオーナーとしてログイン", sample_owner_path, class: "dropdown-item", method: 'post' %>
-          <% end %>
-        </div>
-      </li>
-      <% end %>
-    </ul>
+        <% if session[:user_id] == nil %>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            オーナーメニュー
+          </a>
+
+
+
+          <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+            <% if session[:owner_id] %>
+            <%= link_to "マイアカウント", o_show_path, class: "dropdown-item" %>
+            <%= link_to "ログアウト", owner_logout_path, method: :delete, class: "dropdown-item" %>
+            <% else %>
+            <%= link_to "ログイン", owner_login_path, class: "dropdown-item" %>
+            <%= link_to "新規会員登録", o_new_path, class: "dropdown-item" %>
+            <%= link_to "サンプルオーナーとしてログイン", sample_owner_path, class: "dropdown-item", method: 'post' %>
+            <% end %>
+          </div>
+        </li>
+        <% end %>
+      </ul>
+    </div>
   </div>
 </nav>
