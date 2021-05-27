@@ -17,9 +17,9 @@
     <%= f.label :address, '住所' %>
     <%= f.text_field :address, class: "form-control" %><br>
     <%= f.label :password, "パスワード" %><span class="required"> *変更しない場合空欄で大丈夫です</span>
-    <%= f.text_field :password, class: "form-control" %><br>
+    <%= f.password_field :password, class: "form-control" %><br>
     <%= f.label :password_confirmation, "パスワードの確認" %><span class="required"> *変更しない場合空欄で大丈夫です</span>
-    <%= f.text_field :password_confirmation, class: "form-control" %><br>
+    <%= f.password_field :password_confirmation, class: "form-control" %><br>
     <%= f.submit label="登録", class: "btn btn-primary btn-lg btn-block" %>
     <% end %>
   </div>

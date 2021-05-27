@@ -1,7 +1,5 @@
 <div class="container">
-  <% if @shop.image? %>
-  <%= image_tag @shop.image.url %><br>
-  <% end %>
+  <%= image_tag @shop.image.url, class: "rounded mx-auto d-block col-9" %><br>
   <h3><%= @shop.name %></h3>
   <p>オーナー：<%= @shop.owner.name %>
   <h5>店舗詳細</h5>
@@ -20,15 +18,15 @@
     <% end %>
     <br>
     <% if @shop.owner == Owner.find_by(id: session[:owner_id]) %>
-    <%= link_to "予約枠の開放・閉鎖", s_res_path %>
-    <%= link_to "店舗情報編集", s_edit_path %>
-    <%= link_to "店舗を削除する", s_destroy_path, method: "patch", data: { confirm: "本当に店舗そのものを削除しますか？" } %>
+    <%= link_to "予約枠の開放", s_res_path, type: "button", class: "btn btn-outline-primary"%>
+    <%= link_to "店舗情報編集", s_edit_path, type: "button", class:"btn btn-outline-primary" %>
+    <%= link_to "店舗を削除する", s_destroy_path, method: "patch", data: { confirm: "本当に店舗そのものを削除しますか？" }, type: "button", class: "btn btn-outline-primary" %>
     <% else %>
-    <%= link_to "質問を送る", ch_show_path %>
-    <%= link_to "予約日時選択", c_new_path %>
+    <%= link_to "質問を送る", ch_show_path, type: "button", class: "btn btn-outline-primary" %>
+    <%= link_to "予約日時選択", c_new_path, type: "button", class: "btn btn-outline-primary" %>
     <% if Calendar.find_by(shop_id: @shop.id, user_id: session[:user_id]) != nil %>
-    <%= link_to "申込予約一覧", c_s_index_path(@shop)%>
+    <%= link_to "申込予約一覧", c_s_index_path(@shop), type: "button", class: "btn btn-outline-primary" %>
     <% end %>
     <% end %>
-    <%= link_to "店舗一覧へ戻る", s_index_path %><br>
+    <%= link_to "店舗一覧へ戻る", s_index_path, type: "button", class: "btn btn-outline-primary" %><br>
 </div>

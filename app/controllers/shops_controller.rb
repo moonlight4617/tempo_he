@@ -18,6 +18,9 @@ class ShopsController < ApplicationController
     if params[:shop][:start_time] != "" && params[:shop][:end_time] != ""
     set_business_time   
     end
+    unless params[:shop][:image]
+      @shop.image = "shop_noimage.jpg"
+    end
       # @shopを保存できたら、tag_to_shopテーブルにタグも保存
     if @shop.save && params[:shop][:tags]
       params[:shop][:tags].each do |tag|
@@ -44,19 +47,28 @@ class ShopsController < ApplicationController
 
   def update
     set_business_time
+    # image = File.open("shop_noimage.jpg")
+    # if params[:shop][:image].nil?
+    #   @shop.image = image
+    # end
     if @shop.update(shop_params) && params[:shop][:tags]
       params[:shop][:tags].each do |tag|
         shop_tag = TagToShop.new(shop_id: @shop.id, tag_id: tag)
         shop_tag.save
+        # @shop.image = image
+        # @shop.save
       end
       flash[:success] = "店舗情報は更新されました"
       redirect_to s_show_path(@shop)
     elsif @shop.update(shop_params)
+      # @shop.image =  image
+      # @shop.save
       flash[:success] = "店舗情報は更新されました"
       redirect_to s_show_path(@shop)
     else
       render 'edit'
     end
+    
   end
 
   def destroy
