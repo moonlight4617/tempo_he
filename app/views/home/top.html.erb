@@ -23,7 +23,6 @@
           <h2 class="text-black mt-0">tempoとは？</h2>
           <hr class="divider my-4" />
           <p class="text-black mb-4">飲食店などのオーナー様は休業日や営業時間外に店舗を一般ユーザー様に貸し出すことができる。一般ユーザー様はオーナー様から店舗を時間単位・日にち単位で借りることができるサービスです.
-          </p>
           <div class="row">
             <div class="col-sm-6">
               <h4 class="textcenter human-think">休業日を作りたい！</h4>
@@ -92,15 +91,15 @@
       <div class="row">
         <div class="col-lg-4 ml-auto text-center mb-5 mb-lg-0">
           <img class="img-human" src="/assets/102_h_hoso.png" alt="ユーザー" />
-          <p><%= link_to "ユーザーについて詳しく", u_about_path%></p>
-          <p>ユーザー新規登録</p>
-          <p>ユーザーログイン</p>
+          <p><%= link_to "ユーザーについて詳しく", u_about_path%>
+          <p><%= link_to "ユーザー会員登録", u_new_path%>
+          <p><%= link_to "ユーザーログイン", user_login_path%>
         </div>
         <div class="col-lg-4 mr-auto text-center">
           <img class="img-shop" src="/assets/1023_hm_h.png" alt="店舗" />
-          <p><%= link_to "オーナーについて詳しく", o_about_path%></p>
-          <p>オーナー新規登録</p>
-          <p>オーナーログイン</p>
+          <p><%= link_to "オーナーについて詳しく", o_about_path%>
+          <p><%= link_to "オーナー会員登録", o_new_path %>
+          <p><%= link_to "オーナーログイン", owner_login_path %>
         </div>
       </div>
     </div>
