@@ -1,24 +1,84 @@
 <h3>店舗一覧</h3>
-<div class="row">
-  <div class="container mt-4">
-    <div class="row w-100">
-      <% @shops.each do |shop| %>
-      <% if shop.del_flg != 1 %>
-      <div class="col-3">
-        <% if shop.image? %>
-        <%= link_to s_show_path(shop) do %>
-        <%= image_tag shop.image.url, class: 'img-thumbnail' %>
+
+<div container-fluid>
+  <div class="row">
+    <div class="col-3">
+      <table class="table">
+
+        <%= form_with model: @shop, url: s_pref_path, local: true, method: 'get' do |f| %>
+        <tr>
+          <th>関東</th>
+        </tr>
+        <tr>
+          <td><%= f.radio_button  :prefecture, "東京" %>
+            <%= f.label :prefecture, "東京" %>
+          </td>
+        </tr>
+        <tr>
+          <td><%= f.radio_button :prefecture, "神奈川" %>
+            <%= f.label :prefecture, "神奈川" %></td>
+        </tr>
+        <tr>
+          <td><%= f.radio_button :prefecture, "埼玉" %>
+            <%= f.label :prefecture, "埼玉" %></td>
+        </tr>
+        <tr>
+          <td><%= f.radio_button :prefecture, "千葉" %>
+            <%= f.label :prefecture, "千葉" %></td>
+        </tr>
+        <tr>
+          <td><%= f.radio_button :prefecture, "茨城" %>
+            <%= f.label :prefecture, "茨城" %></td>
+        </tr>
+        <tr>
+          <td><%= f.radio_button :prefecture, "栃木" %>
+            <%= f.label :prefecture, "栃木" %></td>
+        <tr>
+          <td><%= f.radio_button :prefecture, "群馬" %>
+            <%= f.label :prefecture, "群馬" %></td>
+        </tr>
+
+
+        <tr>
+          <th>特徴タグ</th>
+        </tr>
+        <%= f.collection_check_boxes :tags, Tag.all, :id, :name , include_hidden: false do |b| %>
+        <tr>
+          <td><%= b.label { b.check_box + b.text } %></td>
+        </tr>
         <% end %>
+        <tr>
+          <td><%= f.submit "検索"%></td>
+        </tr>
         <% end %>
-        <div class="row">
-          <div class="col-12">
-            <p class="mt-2"><%= shop.name %></p>
-            <%= link_to "店舗詳細", s_show_path(shop) %>
+      </table>
+    </div>
+
+
+    <div class="col-9">
+      <div class="row">
+        <div class="container mt-4">
+          <div class="row w-100">
+            <% @shops.each do |shop| %>
+            <% if shop.del_flg != 1 %>
+            <div class="col-3">
+              <% if shop.image? %>
+              <%= link_to s_show_path(shop) do %>
+              <%= image_tag shop.image.url, class: 'img-thumbnail' %>
+              <% end %>
+              <% end %>
+              <div class="row">
+                <div class="col-12">
+                  <p class="mt-2"><%= shop.name %></p>
+                  <%= link_to "店舗詳細", s_show_path(shop) %>
+                </div>
+              </div>
+            </div>
+            <% end %>
+            <% end %>
           </div>
         </div>
       </div>
-      <% end %>
-      <% end %>
     </div>
   </div>
 </div>

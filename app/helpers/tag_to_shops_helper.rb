@@ -1,0 +1,2 @@
+module TagToShopsHelper
+end

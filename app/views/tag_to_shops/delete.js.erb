@@ -1,0 +1,4 @@
+//#existing-tagを削除、その後renderでパーシャル部分を呼び出す。
+$('#existing-tag').replaceWith(
+"<%= j(render 'shops/tag', shop: @shop) %>"
+);
