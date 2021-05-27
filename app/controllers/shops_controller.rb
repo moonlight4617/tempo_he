@@ -52,6 +52,33 @@ class ShopsController < ApplicationController
     p params
   end
 
+  def select_prefecture
+    
+    p params
+      
+    prefecture_params = params.permit(prefecture: [])
+    @shops = Shop.where('prefecture LIKE ?', "%#{params[:prefecture]}}%")
+    # @shops = Shop.search(@search_params).includes(:tag)
+    # tag_params = params.permit(:tag)
+    
+    binding.pry
+    
+    
+    # joins(:tag_to_shops).where('tag_id LIKE ?', "%#{params[:search][:tag]}%")
+    
+
+    
+    # .where(tag_id: params[:search][:tag])
+    
+    @tags = Tag.all
+
+    # pre_shops = Shop.where(prefecture: params[:prefecture])
+    # @shops = tag_shops & pre_shops
+    
+    render 'index'
+  
+  end
+
   def create_business_time
   end
 
