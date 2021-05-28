@@ -6,7 +6,7 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 @prefecture = ["東京都", "神奈川県", "埼玉県", "千葉"]
-3.times do |n|
+10.times do |n|
   name = Faker::Name.name
   email = Faker::Internet.email
   password = '12345678'
@@ -31,3 +31,28 @@
     station: station,
   )
 end
+
+Tag.create(
+  name: "コンセントあり"
+)
+Tag.create(
+  name: "wifiあり"
+)
+Tag.create(
+  name: "１棟丸ごと貸しOK"
+)
+Tag.create(
+  name: "終日貸しOK"
+)
+Tag.create(
+  name: "駅から徒歩１０分以内"
+)
+Tag.create(
+  name: "定期貸しOK"
+)
+Tag.create(
+  name: "喫煙OK"
+)
+Tag.create(
+  name: "ソファ席あり"
+)
