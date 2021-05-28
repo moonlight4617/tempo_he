@@ -5,6 +5,7 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+
 @prefecture = ["東京都", "神奈川県", "埼玉県", "千葉"]
 10.times do |n|
   name = Faker::Name.name
@@ -25,7 +26,7 @@
     owner_id: owner.id,
     name: shop_name,
     zip_code: zip_code,
-    prefecture: @prefecture[n],
+    prefecture: @prefecture[Faker::Number.within(range: 0..4)],
     city: city,
     tel: tel,
     station: station,
@@ -54,5 +55,5 @@ Tag.create(
   name: "喫煙OK"
 )
 Tag.create(
-  name: "ソファ席あり"
+  name: "テラス席あり"
 )
