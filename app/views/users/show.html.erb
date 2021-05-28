@@ -1,22 +1,21 @@
 <div class="container">
   <h3 class="text-center">マイアカウント</h3>
   <div class="row">
-    <div class="col-4">
-      <%= image_tag @user.image.url if @user.image? %>
+    <div class="col-lg-4 col-sm-12">
+      <%= image_tag @user.image.url, width: "250" %>
     </div>
-    <div class="col-8">
+    <div class="col-lg-8 col-sm-12">
       <%= @user.name %><br>
       <i class="far fa-star"></i>
       <i class="far fa-star"></i>
       <i class="far fa-star"></i><br>
       Eメール：<%= @user.email %><br>
       <p>口コミ評価：口コミ評価の本文口コミ評価の本文口コミ評価の本文口コミ評価の本文口コミ評価の本文口コミ評価の本文口コミ評価の本文</p>
-      <%= link_to "登録情報編集", u_edit_path %><br>
-      <%= link_to "アカウントの削除", u_destroy_path, method: "patch" ,data: { confirm: "本当にアカウントそのものを削除しますか？" } %>
+      <%= link_to "登録情報編集", u_edit_path, class: "btn btn-primary mb-4" %><br>
     </div>
   </div>
   <div class="row">
-    <div class="col-6">
+    <div class="col-lg-6 col-sm-12">
       <h2>現在申込中の店舗</h2>
       <% if @newest_reserve != [] %>
       <% @newest_reserve.each do |cal| %>
@@ -29,9 +28,8 @@
       <% else %>
       <p>現在、申込中の店舗はありません</p>
       <% end %>
-      <%= link_to "予約一覧", c_index_path%>
     </div>
-    <div class="col-6">
+    <div class="col-lg-6 col-sm-12">
       <h2>過去に利用した店舗</h2>
       <% if @newest_reserve != [] %>
       <% @newest_reserve.each do |cal| %>
@@ -44,12 +42,6 @@
       <% else %>
       <p>まだありません</p>
       <% end %>
-      <%
-=begin%>
-      <img src="https://via.placeholder.com/150">
-      <img src="https://via.placeholder.com/150">
-      <%
-=end%>
     </div>
   </div>
 </div>
