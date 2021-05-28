@@ -13,7 +13,7 @@ Rails.application.routes.draw do
   get 'owners/edit', to: 'owners#edit', as: 'o_edit'
   get 'owners/about', to: 'owners#about', as: 'o_about'
   post 'owners/new', to: 'owners#create', as: 'o_create'
-  patch 'owners/edit', to: 'owners#update'
+  patch 'owners/edit', to: 'owners#update', as: 'o_update'
   patch 'owners/delete', to: 'owners#destroy', as: 'o_destroy'
   
   #shops
