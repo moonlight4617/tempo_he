@@ -57,7 +57,6 @@
             <tr>
               <th>特徴タグ</th>
             </tr>
-            <% if Tag.first.present? %>
             <%= f.collection_check_boxes :tags, Tag.all, :id, :name , include_hidden: false do |b| %>
             <tr>
               <td><%= b.label { b.check_box + b.text } %></td>
@@ -66,7 +65,6 @@
             <tr>
               <td class="text-center"><%= f.submit "検索", class: "btn bg-white"%></td>
             </tr>
-            <% end %>
             <% end %>
           </table>
           <!--- 検索メニュー --->
@@ -99,19 +97,15 @@
       </div>
       <!---店舗一覧--->
 
+      <!---ページネーション--->
+      <nav aria-label="Page navigation example">
+        <ul class="pagination justify-content-center pt-4">
+          <%= paginate @shops %>
+        </ul>
+      </nav>
+      <!---ページネーション--->
 
     </div>
-    </nav>
-
-
-
-
-    <ul class="pagination justify-content-center">
-
-      <%= paginate @shops %>
-    </ul>
-
-
   </div>
 </div>
 
