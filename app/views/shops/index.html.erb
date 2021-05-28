@@ -1,81 +1,141 @@
-<div container-fluid>
+<div class="container-fluid">
   <div class="row">
-    <div class="col-lg-3 col-sm-2">
-      <table class="table">
-        <%= form_with model: @shop, url: s_pref_path, local: true, method: 'get' do |f| %>
-        <tr>
-          <th class="text-center">絞り込み検索</th>
-        </tr>
-        <tr>
-          <th>関東</th>
-        </tr>
-        <tr>
-          <td><%= f.radio_button  :prefecture, "東京" %>
-            <%= f.label :prefecture, "東京" %>
-          </td>
-        </tr>
-        <tr>
-          <td><%= f.radio_button :prefecture, "神奈川" %>
-            <%= f.label :prefecture, "神奈川" %></td>
-        </tr>
-        <tr>
-          <td><%= f.radio_button :prefecture, "埼玉" %>
-            <%= f.label :prefecture, "埼玉" %></td>
-        </tr>
-        <tr>
-          <td><%= f.radio_button :prefecture, "千葉" %>
-            <%= f.label :prefecture, "千葉" %></td>
-        </tr>
-        <tr>
-          <td><%= f.radio_button :prefecture, "茨城" %>
-            <%= f.label :prefecture, "茨城" %></td>
-        </tr>
-        <tr>
-          <td><%= f.radio_button :prefecture, "栃木" %>
-            <%= f.label :prefecture, "栃木" %></td>
-        <tr>
-          <td><%= f.radio_button :prefecture, "群馬" %>
-            <%= f.label :prefecture, "群馬" %></td>
-        </tr>
-        <tr>
-          <th>特徴タグ</th>
-        </tr>
-        <%= f.collection_check_boxes :tags, Tag.all, :id, :name , include_hidden: false do |b| %>
-        <tr>
-          <td><%= b.label { b.check_box + b.text } %></td>
-        </tr>
-        <% end %>
-        <tr>
-          <td><%= f.submit "検索"%></td>
-        </tr>
-        <% end %>
-      </table>
-    </div>
 
-    <div class="col-sm-10 col-lg-9">
-      <div class="container mt-4">
+    <div class="page-wrapper chiller-theme toggled">
 
-        <div class="row">
-          <% @shops.each do |shop| %>
-          <% if shop.del_flg != 1 %>
-          <div class="col-lg-4">
-            <div class="card mb-2">
-              <%= link_to s_show_path(shop) do %>
-              <%= image_tag shop.image.url, class: 'img-thumbnail' %>
-              <% end %>
-              <div class="row card-body">
-                <p class="mt-2"><%= shop.name %></p>
-                <p><%= shop.station %>駅</p>
-                <p>基本料金：¥ <%= shop.price %>/h</p>
-                <%= link_to "店舗詳細", s_show_path(shop) %>
-              </div>
+      <!---サイドバー--->
+      <a id="show-sidebar" class="btn btn-sm btn-warning" href="#">
+        <i class="fas fa-bars"></i>
+      </a>
+      <nav id="sidebar" class="sidebar-wrapper bg-warning">
+        <div class="sidebar-content">
+          <div class="sidebar-brand">
+            <div id="close-sidebar">
+              <i class="fas fa-times"></i>
             </div>
           </div>
-          <% end %>
-          <% end %>
-        </div>
 
+          <!-- 検索メニュー -->
+          <table class="table">
+            <%= form_with model: @shop, url: s_pref_path, local: true, method: 'get' do |f| %>
+            <tr>
+              <th class="text-center">絞り込み検索</th>
+            </tr>
+            <tr>
+              <th>関東</th>
+            </tr>
+            <tr>
+              <td><%= f.radio_button  :prefecture, "東京" %>
+                <%= f.label :prefecture, "東京" %>
+              </td>
+            </tr>
+            <tr>
+              <td><%= f.radio_button :prefecture, "神奈川" %>
+                <%= f.label :prefecture, "神奈川" %></td>
+            </tr>
+            <tr>
+              <td><%= f.radio_button :prefecture, "埼玉" %>
+                <%= f.label :prefecture, "埼玉" %></td>
+            </tr>
+            <tr>
+              <td><%= f.radio_button :prefecture, "千葉" %>
+                <%= f.label :prefecture, "千葉" %></td>
+            </tr>
+            <tr>
+              <td><%= f.radio_button :prefecture, "茨城" %>
+                <%= f.label :prefecture, "茨城" %></td>
+            </tr>
+            <tr>
+              <td><%= f.radio_button :prefecture, "栃木" %>
+                <%= f.label :prefecture, "栃木" %></td>
+            <tr>
+              <td><%= f.radio_button :prefecture, "群馬" %>
+                <%= f.label :prefecture, "群馬" %></td>
+            </tr>
+            <tr>
+              <th>特徴タグ</th>
+            </tr>
+            <%= f.collection_check_boxes :tags, Tag.all, :id, :name , include_hidden: false do |b| %>
+            <tr>
+              <td><%= b.label { b.check_box + b.text } %></td>
+            </tr>
+            <% end %>
+            <tr>
+              <td><%= f.submit "検索"%></td>
+            </tr>
+            <% end %>
+          </table>
+          <!-- 検索メニュー -->
+
+        </div>
+      </nav>
+      <!---サイドバー--->
+
+      <div class="col-sm-10 col-lg-9">
+        <div class="container mt-4">
+
+          <div class="row">
+            <% @shops.each do |shop| %>
+            <% if shop.del_flg != 1 %>
+            <div class="col-lg-4">
+              <div class="card mb-2">
+                <%= link_to s_show_path(shop) do %>
+                <%= image_tag shop.image.url, class: 'img-thumbnail' %>
+                <% end %>
+                <div class="row card-body">
+                  <p class="mt-2"><%= shop.name %></p>
+                  <p><%= shop.station %>駅</p>
+                  <p>基本料金：¥ <%= shop.price %>/h</p>
+                  <%= link_to "店舗詳細", s_show_path(shop) %>
+                </div>
+              </div>
+            </div>
+            <% end %>
+            <% end %>
+          </div>
+
+        </div>
       </div>
+
     </div>
+
+
+
+    </nav>
+
   </div>
 </div>
+
+
+
+
+<script>
+  $(".sidebar-dropdown > a").click(function() {
+    $(".sidebar-submenu").slideUp(200);
+    if (
+      $(this)
+      .parent()
+      .hasClass("active")
+    ) {
+      $(".sidebar-dropdown").removeClass("active");
+      $(this)
+        .parent()
+        .removeClass("active");
+    } else {
+      $(".sidebar-dropdown").removeClass("active");
+      $(this)
+        .next(".sidebar-submenu")
+        .slideDown(200);
+      $(this)
+        .parent()
+        .addClass("active");
+    }
+  });
+
+  $("#close-sidebar").click(function() {
+    $(".page-wrapper").removeClass("toggled");
+  });
+  $("#show-sidebar").click(function() {
+    $(".page-wrapper").addClass("toggled");
+  });
+</script>
