@@ -13,12 +13,13 @@ Rails.application.routes.draw do
   get 'owners/edit', to: 'owners#edit', as: 'o_edit'
   get 'owners/about', to: 'owners#about', as: 'o_about'
   post 'owners/new', to: 'owners#create', as: 'o_create'
-  patch 'owners/edit', to: 'owners#update'
+  patch 'owners/edit', to: 'owners#update', as: 'o_update'
   patch 'owners/delete', to: 'owners#destroy', as: 'o_destroy'
   
   #shops
   get 'shops', to: 'shops#index', as: 's_index'
   get 'shops/new', to: 'shops#new', as: 's_new'
+  get 'shops/select_prefecture', to: 'shops#select_prefecture', as: 's_pref'
   get 'shops/:id', to: 'shops#show', as: 's_show'
   get 'shops/:id/edit', to: 'shops#edit', as: 's_edit'
   get 'shops/:id/set_business_time', to: 'shops#set_business_time', as: 's_set_business_time'
@@ -43,13 +44,6 @@ Rails.application.routes.draw do
   post 'shops/:id/chats/msg', to: 'chats#message', as: 'ch_msg' 
   post 'shops/:id/chats/msg_owner', to: 'chats#message_from_shop', as: 'ch_msg_shop' 
   delete 'shops/:id/chats/:id/delete', to: 'chats#destroy', as: 'ch_d' 
-  
-  # messages
-  # get 'shops/:id/messages/index', to: 'messages#index', as: 'm_index' 
-  # get 'shops/:id/messages/new', to: 'messages#new', as: 'm_new' 
-  # get 'shops/:id/messages/:id', to: 'messages#show', as: 'm_show' 
-  # post 'shops/:id/messages/new', to: 'messages#create', as: 'm_create' 
-  # delete 'shops/:id/messages/:id/delete', to: 'messages#destroy', as: 'm_destroy' 
 
   #calendars
   get 'shops/calendars/index', to: 'calendars#index_for_user', as: 'c_index'
@@ -77,4 +71,7 @@ Rails.application.routes.draw do
   post 'users/login', to: 'user_sessions#create', as: 'user_logged_in'
   post 'users/login_sample', to: 'user_sessions#sample_user', as: 'sample_user'
   delete 'users/logout', to: 'user_sessions#logout', as: 'user_logout'
+
+  # tag_to_shops
+  delete 'shops/:id/tag/:id/delete', to: 'tag_to_shops#delete', as: 'tag_delete'
 end

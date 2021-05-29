@@ -1,11 +1,12 @@
 class ShopsController < ApplicationController
-  before_action :set_shop, except: [:new, :create, :index, :zip]
+  before_action :set_shop, except: [:new, :create, :index, :zip, :select_prefecture]
   before_action :set_owner, only: [:create, :show]
   before_action :before_login_owner, only: [:new, :create, :edit, :update, :destroy]
   before_action :correct_owner, only: [:edit, :update, :destroy]
   
   def index
     @shops = Shop.all
+    @tags = Tag.all
   end
 
   def new
@@ -17,7 +18,18 @@ class ShopsController < ApplicationController
     if params[:shop][:start_time] != "" && params[:shop][:end_time] != ""
     set_business_time   
     end
-    if @shop.save
+    unless params[:shop][:image]
+      @shop.image = "shop_noimage.jpg"
+    end
+      # @shopを保存できたら、tag_to_shopテーブルにタグも保存
+    if @shop.save && params[:shop][:tags]
+      params[:shop][:tags].each do |tag|
+        shop_tag = TagToShop.new(shop_id: @shop.id, tag_id: tag)
+        shop_tag.save
+      end
+      flash[:success] = "店舗登録されました"
+      redirect_to s_show_path(@shop)
+    elsif @shop.save
       flash[:success] = "店舗登録されました"
       redirect_to s_show_path(@shop)
     else
@@ -27,6 +39,7 @@ class ShopsController < ApplicationController
 
   def show
     @owner = @shop.owner
+    @tags = @shop.tags
   end
 
   def edit
@@ -34,22 +47,49 @@ class ShopsController < ApplicationController
 
   def update
     set_business_time
-    if @shop.update(shop_params)
+    # image = File.open("shop_noimage.jpg")
+    # if params[:shop][:image].nil?
+    #   @shop.image = image
+    # end
+    if @shop.update(shop_params) && params[:shop][:tags]
+      params[:shop][:tags].each do |tag|
+        shop_tag = TagToShop.new(shop_id: @shop.id, tag_id: tag)
+        shop_tag.save
+        # @shop.image = image
+        # @shop.save
+      end
+      flash[:success] = "店舗情報は更新されました"
+      redirect_to s_show_path(@shop)
+    elsif @shop.update(shop_params)
+      # @shop.image =  image
+      # @shop.save
       flash[:success] = "店舗情報は更新されました"
       redirect_to s_show_path(@shop)
     else
       render 'edit'
     end
+    
   end
 
   def destroy
     @shop.del_flg = 1
     @shop.save
-    redirect_to s_index_path
+    flash[:success] = "店舗は削除されました"
+    redirect_to root_path
   end
 
   def zip
     p params
+  end
+
+  def select_prefecture
+    # 後ほど、修正。prefectureがない時は？
+    if params[:tags] 
+      @shops = Shop.where("prefecture LIKE ?", "%#{params[:prefecture]}%").joins(:tag_to_shops).where(tag_to_shops: {tag_id: params[:tags]})
+    else
+      @shops = Shop.where("prefecture LIKE ?", "%#{params[:prefecture]}%")
+    end
+    render 'index'
   end
 
   def create_business_time
@@ -191,7 +231,8 @@ class ShopsController < ApplicationController
   private
 
     def shop_params
-      params.require(:shop).permit(:name, :prefecture, :city, :address, :tel, :station, :capacity, :image, :price, :content, :zip_code, :start_time, :end_time)
+      # tag_to_shops_attributes必要ない？
+      params.require(:shop).permit(:name, :prefecture, :city, :address, :tel, :station, :capacity, :image, :price, :content, :zip_code, :start_time, :end_time, :tags, tag_to_shops_attributes: [:id, :tag_id, :shop_id])
     end
 
     def set_shop

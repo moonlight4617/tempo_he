@@ -1,0 +1,11 @@
+<div id="existing-tag">
+  <p>特徴</p>
+  <% shop.tags.each do |tag| %>
+  <span class="badge rounded-pill bg-secondary text-white">
+    <%= tag.name %>
+    <%= link_to tag_delete_path(shop, tag_id: tag.id), method: :delete, remote: true, data: { confirm: "「#{tag.name}」タグを削除しますか?" } do  %>
+    <i class="fas fa-times text-white"></i>
+    <% end %>
+  </span>
+  <% end %>
+</div>
