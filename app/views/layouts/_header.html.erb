@@ -19,6 +19,7 @@
           <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
             <% if session[:user_id] %>
             <%= link_to "マイアカウント", u_show_path, class: "dropdown-item" %>
+            <%= link_to "メッセージ", ch_index_user_path, class: "dropdown-item" %>
             <%= link_to "予約一覧", c_index_path, class: "dropdown-item" %>
             <%= link_to "ログアウト", user_logout_path, method: :delete, class: "dropdown-item" %>
             <% else %>
@@ -35,12 +36,12 @@
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
             オーナーメニュー
           </a>
-
-
-
           <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
             <% if session[:owner_id] %>
+            <% owner_id =  session[:owner_id] %>
+            <% shop = Shop.find_by(owner_id: owner_id) %>
             <%= link_to "マイアカウント", o_show_path, class: "dropdown-item" %>
+            <%= link_to "メッセージ", ch_index_owner_path(shop), class: "dropdown-item" %>
             <%= link_to "ログアウト", owner_logout_path, method: :delete, class: "dropdown-item" %>
             <% else %>
             <%= link_to "ログイン", owner_login_path, class: "dropdown-item" %>

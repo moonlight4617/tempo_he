@@ -1,0 +1,12 @@
+<h3>メッセージ 一覧</h3>
+<% if @chats.present? %>
+<% @chats.each do |chat| %>
+<% shop = chat.shop %>
+<ul>
+  <li><%= link_to "#{shop.name }とのメッセージ", ch_show_path(chat.shop) %></li>
+  <%= chat.messages.last.content %>
+</ul>
+<% end %>
+<% else %>
+<p>メッセージはありません。</p>
+<% end %>

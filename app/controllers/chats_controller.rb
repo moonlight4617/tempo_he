@@ -1,13 +1,19 @@
 class ChatsController < ApplicationController
-  before_action :set_shop
+  before_action :set_shop, except: :index_for_user
   before_action :set_chat, only: :show
-  before_action :set_current_user, only: :message
+  before_action :set_current_user, only: [:message, :index_for_user]
+
 
   # ユーザーから見た各オーナーとの個別チャット
   def show
     if @chat != nil
       @messages = Message.where(chat_id: @chat.id)
     end
+  end
+
+  # ユーザーから見たチャット一覧
+  def index_for_user
+    @chats = Chat.where(user_id: @current_user)
   end
 
   # オーナーに来ているチャット全て
@@ -17,7 +23,7 @@ class ChatsController < ApplicationController
 
   # オーナー側から見た各ユーザーとの個別チャット
   def show_for_owner
-    @user = User.find_by(public_uid: params[:user])
+    @user = User.find_by(public_uid: params[:user_id])
     @chat = Chat.find_by(shop_id: params[:id], user_id: @user.id) || Chat.create(shop_id: params[:id], user_id: @user.id)
     @messages = Message.where(chat_id: @chat.id)
   end

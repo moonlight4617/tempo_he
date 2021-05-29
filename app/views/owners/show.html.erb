@@ -1,11 +1,14 @@
 <section class="container">
   <h3>マイアカウント</h3>
-  <% @shops.each do |shop| %>
-  <% if shop.del_flg != 1 %>
+  <p>オーナー：<%= @owner.name %>
+    <% @shops.each do |shop| %>
+    <% if shop.del_flg != 1 %>
   <div class="row">
     <%= image_tag shop.image.url , class: "rounded mx-auto d-block col-6" %>
   </div>
   <h4><%= shop.name %></h4>
+
+  <!----予約カレンダー---->
   <p>今後の予約</p>
   <% calendars = Calendar.where(shop_id: shop.id , rent_date: Date.today..Float::INFINITY)%>
   <% if calendars.present?%>
@@ -21,13 +24,18 @@
   <% else %>
   <p>＜予約はまだありません＞</p>
   <% end %>
-  <%= link_to "店舗詳細", s_show_path(shop) %><br>
-  <%= link_to "メッセージ", ch_index_owner_path(shop) %><br>
+  <!----予約カレンダー---->
+
+  <%= link_to "店舗詳細", s_show_path(shop), class: "btn btn-outline-primary" %>
+  <span>
+    <%= link_to "メッセージ", ch_index_owner_path(shop), class: "btn btn-outline-primary" %>
+  </span>
+  <span><%= link_to "予約枠の開放", s_res_path(shop), type: "button", class: "btn btn-outline-primary"%>
+  </span><br>
   <% end %>
   <hr>
   <% end %>
   </div>
   <%= link_to "新しく店舗を登録する", s_new_path %><br>
   <%= link_to "オーナーアカウントの編集", o_edit_path %><br>
-  <%= link_to "オーナーアカウントの削除", o_destroy_path, method: "patch" ,data: { confirm: "一度アカウントを削除すると、元に戻せません。本当にアカウントそのものを削除しますか？" } %>
 </section>
