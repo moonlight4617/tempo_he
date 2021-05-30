@@ -28,7 +28,7 @@
         <th><%= hour %>:00</th>
         <% 7.times do %>
         <% cal_date = @t.slice!(0)%>
-        <% if !@available.include?(cal_date) || @rentDays.include?(cal_date) %>
+        <% if !@available.include?(cal_date) %>
         <td class="text-center">x</td>
         <% else %>
         <td class="text-center"><%= f.check_box :rent_date, {multiple: true}, cal_date, nil %></td>
@@ -38,7 +38,7 @@
       </tr>
     </tbody>
   </table>
-  <%= f.submit "確認画面へ" %>
+  <%= f.submit "申し込み画面へ", class: "btn btn-primary" %>
   <% end%>
-  <%= link_to "店舗に質問を送る", ch_show_path %>
+  <%= link_to "店舗に質問を送る", ch_show_path, class: "btn btn-outline-primary" %>
 </div>

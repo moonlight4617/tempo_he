@@ -13,14 +13,6 @@ before_action :set_shop, except: :index_for_user
     @today = Date.today
     @year = @today.year
     @year_month = "#{@today.year} / #{@today.month}"
-    available = Available.where(shop_id: @shop.id).pluck(:rent_date, :start_time)
-    @available = []
-      i = 0
-      while i < available.length do
-        r = "#{available[i][0]}, #{available[i][1]}"
-        @available.push(r)
-        i += 1
-      end
     set_business_time
     set_calendar    
   end
@@ -29,49 +21,45 @@ before_action :set_shop, except: :index_for_user
     reserve_days = params[:calendar][:candidate_days]
     reserve = reserve_days.split
     i = 0
-    while i <= reserve.length do
+    while i < reserve.length do
       @shop.calendars.create(
         rent_date: reserve[i],
         start_time: reserve[i+1],            
         user_id: session[:user_id]
-        )
-        i += 2
+      )
+      @available = @shop.availables.find_by(
+        rent_date: reserve[i],
+        start_time: reserve[i+1]
+      )
+      @available.delete
+      i += 2
     end
     redirect_to c_index_path
   end
 
-  # def create
-  #   if params[:next] != nil
-  #     today = params[:calendar][:day].to_date
-  #     @today = today + 7
-  #     set_business_time
-  #     set_calendar
-  #     render "new"
-  #   elsif params[:prev] != nil
-  #     today = params[:calendar][:day].to_date
-  #     @today = today - 7
-  #     set_business_time
-  #     set_calendar
-  #     render "new"
-  #   elsif params[:calendar][:rent_date] != nil
-  #     params[:calendar][:rent_date].each do |reserve|
-  #       res = reserve.split
-  #       @calendar = @shop.calendars.create(
-  #             rent_date: res[0],
-  #             start_time: res[1],            
-  #             user_id: session[:user_id]
-  #           )
-  #     end
-  #     redirect_to c_index_path
-  #   else
-  #     flash[:danger] = "日時をチェックしてください"
-  #     redirect_to c_new_path
-  #   end
-  # end
-
+  # ユーザーへの確認画面
   def confirm
-    if params[:calendar][:rent_date] != nil
+    # 「次の週へ」
+    if params[:next] != nil
+      today = params[:calendar][:day].to_date
+      @today = today + 7
+      set_business_time
+      set_calendar
+      render "new"
+
+    # 「前の週へ」
+    elsif params[:prev] != nil
+      today = params[:calendar][:day].to_date
+      @today = today - 7
+      set_business_time
+      set_calendar
+      render "new"
+
+    # 日時選択した場合
+    elsif params[:calendar][:rent_date] != nil
       @candidate_days = params[:calendar][:rent_date]
+
+      # 予約可能日を@availableに格納
       available = Available.where(shop_id: @shop.id).pluck(:rent_date, :start_time)
       @available = []
       i = 0
@@ -80,6 +68,8 @@ before_action :set_shop, except: :index_for_user
         @available.push(r)
         i += 1
       end
+
+      # ユーザーが選択した日時が過去日付でないか、選択可能日時かどうかをチェック
       i = 0
       while i < @candidate_days.length do
         r_date = @candidate_days[i].to_date
@@ -94,12 +84,10 @@ before_action :set_shop, except: :index_for_user
         end
         i += 1
       end
-      # @candidate_days
     else
       flash[:danger] = "日時を選択してください"
       redirect_to c_new_path
     end
- 
   end
 
   # オーナーに対して、今入っている予約一覧の表示
@@ -134,22 +122,15 @@ before_action :set_shop, except: :index_for_user
         w = @today + i
         @week.push(w)
       end
-
-      # すでに入っている予約の日時を@rentDaysとして取得
-      rentDays = Calendar.where(shop_id: params[:id]).pluck(:rent_date, :start_time)
-      @rentDays = []
+      # 店舗が開放している日付を@availableに格納
+      available = Available.where(shop_id: @shop.id).pluck(:rent_date, :start_time)
+      @available = []
       i = 0
-      while i < rentDays.length do
-        r = "#{rentDays[i][0]}, #{rentDays[i][1]}"
-        @rentDays.push(r)
+      while i < available.length do
+        r = "#{available[i][0]}, #{available[i][1]}"
+        @available.push(r)
         i += 1
       end
-      # rent_dayTimes.each do |dayTime|
-      #   s_rent = "#{dayTime[0]}, #{dayTime[1]}"
-      #   @rentDays.push(s_rent)
-      # end
-      # rentDays ? @rentDays = rentDays : @rentDays = []
-      
       # @tに１週間分の日付と曜日いれる
       @t = []
       @able_time.each do |t|

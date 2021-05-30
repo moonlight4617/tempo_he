@@ -79,7 +79,6 @@ class ShopsController < ApplicationController
     else
       @shops = Shop.where("prefecture LIKE ?", "%#{params[:prefecture]}%")
     end
-    render 'index'
   end
 
   def create_business_time
