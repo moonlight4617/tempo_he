@@ -75,4 +75,7 @@ Rails.application.routes.draw do
 
   # tag_to_shops
   delete 'shops/:id/tag/:id/delete', to: 'tag_to_shops#delete', as: 'tag_delete'
+
+  
+  get 'test', to: 'home#test', as: 'test'
 end

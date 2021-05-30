@@ -47,22 +47,14 @@ class ShopsController < ApplicationController
 
   def update
     set_business_time
-    # image = File.open("shop_noimage.jpg")
-    # if params[:shop][:image].nil?
-    #   @shop.image = image
-    # end
     if @shop.update(shop_params) && params[:shop][:tags]
       params[:shop][:tags].each do |tag|
         shop_tag = TagToShop.new(shop_id: @shop.id, tag_id: tag)
         shop_tag.save
-        # @shop.image = image
-        # @shop.save
       end
       flash[:success] = "店舗情報は更新されました"
       redirect_to s_show_path(@shop)
     elsif @shop.update(shop_params)
-      # @shop.image =  image
-      # @shop.save
       flash[:success] = "店舗情報は更新されました"
       redirect_to s_show_path(@shop)
     else
@@ -79,11 +71,9 @@ class ShopsController < ApplicationController
   end
 
   def zip
-    p params
   end
 
   def select_prefecture
-    # 後ほど、修正。prefectureがない時は？
     if params[:tags] 
       @shops = Shop.where("prefecture LIKE ?", "%#{params[:prefecture]}%").joins(:tag_to_shops).where(tag_to_shops: {tag_id: params[:tags]})
     else
@@ -95,36 +85,27 @@ class ShopsController < ApplicationController
   def create_business_time
   end
 
-  # オーナーが予約開放する際のカレンダー表示
+  # オーナーが予約開放する際に見るカレンダー表示
   def reservation_frame
-    # available_days?
-    # a_days = Available.where(shop_id: @shop.id)
-    # a_days.each do |day|
-    #   @available_days.push("#{day.rent_date}, #{day.start_time}:00:00")
-    # end
     set_available_days
     @today = Date.today
     call_business_time
     set_calendar
   end
 
+  # オーナーが予約開放した日時をAvailableテーブルに格納
   def set_reservation_frame
     start_time = params[:start_time].to_i
     end_time = params[:end_time].to_i
     while start_time < end_time do
         if start_time < 10
-          # @available_days.push("#{params[:rent_date]}, 0#{start_time}:00:00")
           @shop.availables.create(rent_date: params[:rent_date], start_time: "0#{start_time}:00:00")
         else
-          # @available_days.push("#{params[:rent_date]}, #{start_time}:00:00")
           @shop.availables.create(rent_date: params[:rent_date], start_time: "#{start_time}:00:00")
         end
       start_time += 1
     end
     respond_to do |format|
-      # if @available.save
-        # day = params[:rent_date] + ", " + start_time
-        # @available_days.push(day)
       set_available_days
       session.delete(:day)
       @today = Date.today
@@ -132,12 +113,6 @@ class ShopsController < ApplicationController
       set_calendar
       format.html { redirect_to s_res_path(params[:id]) }
       format.js { @status = "success"}
-      # else
-      #   flash[:danger] = "有効な日付を入力してください"
-      #   format.html { render 'reservation_frame' }
-      #   format.js { @status = "fail" }
-      # end
-      # render 'reservation_frame'
     end
   end
 
@@ -251,6 +226,7 @@ class ShopsController < ApplicationController
       end
     end
 
+    # 店側がカレンダーに表示させる時間帯を登録する場合の処理
     def set_business_time
       if params[:shop][:start_time] != "" && params[:shop][:end_time] != ""
         s_time = params[:shop][:start_time].to_i
@@ -264,18 +240,20 @@ class ShopsController < ApplicationController
       end
     end
 
+    # カレンダーに表示する時間帯を呼び出す
     def call_business_time
-      if @shop.business_time 
-        able_time = @shop.business_time
-        slim_time = able_time.split(",")
-        slim_time[0] = slim_time.first.delete("[")
-        slim_time[-1] = slim_time.last.delete("]")
-        @able_time = slim_time
-      else
-        @able_time = (9..23).to_a
-      end
+      # if @shop.business_time 
+      #   able_time = @shop.business_time
+      #   slim_time = able_time.split(",")
+      #   slim_time[0] = slim_time.first.delete("[")
+      #   slim_time[-1] = slim_time.last.delete("]")
+      #   @able_time = slim_time
+      # else
+        @able_time = (1..24).to_a
+      # end
     end
 
+    # カレンダーを本日日付から始めるための処理
     def set_calendar
       @year = @today.year
       @year_month = "#{@today.year} / #{@today.month}"
@@ -284,17 +262,14 @@ class ShopsController < ApplicationController
         w = @today + i
         @week.push(w)
       end
-
       # すでに入っている予約の日時を@rentDaysとして取得
       rent_dayTimes = Available.where(shop_id: params[:id]).pluck(:rent_date, :start_time)
       @t = []
       @rentDays = []
-
       rent_dayTimes.each do |dayTime|
         s_rent = "#{dayTime[0]}, #{dayTime[1]}"
         @rentDays.push(s_rent)
       end
-      
       # @tに１週間分の日付と曜日いれる
       @able_time.each do |t|
         @week.each do |w|
@@ -307,12 +282,7 @@ class ShopsController < ApplicationController
       end
     end    
 
-    # def available_days?
-    #   if @available_days == nil
-    #     @available_days = []
-    #   end
-    # end
-
+    # オーナーが開放した日時を取得
     def set_available_days
       @available_days = []
       a_days = Available.where(shop_id: @shop.id)
