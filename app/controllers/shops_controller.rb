@@ -5,7 +5,7 @@ class ShopsController < ApplicationController
   before_action :correct_owner, only: [:edit, :update, :destroy]
   
   def index
-    @shops = Shop.all.page(params[:page]).per(50)
+    @shops = Shop.all.includes(:tags).page(params[:page]).per(50)
     @tags = Tag.all
   end
 

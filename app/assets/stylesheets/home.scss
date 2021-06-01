@@ -1,5 +1,17 @@
 @charset "UTF-8";
 
+#header{
+  background-color: #ff9b00;
+}
+
+#body{
+  background-color: #fae2a9;
+}
+
+#shop-card{
+  background-color: #fdbe5e;
+}
+
 :root {
   --blue: #007bff;
   --indigo: #6610f2;
@@ -65,7 +77,6 @@ body {
   line-height: 1.5;
   color: #212529;
   text-align: left;
-  background-color: #fff;
 }
 
 [tabindex="-1"]:focus:not(:focus-visible) {

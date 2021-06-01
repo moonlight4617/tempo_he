@@ -5,10 +5,9 @@
       <div class="row h-100 align-items-center justify-content-center text-center">
         <div class="col-lg-10 align-self-end">
           <h1 class="text-white font-weight-bold">tempo</h1>
-          <hr class="divider my-4" />
         </div>
         <div class="col-lg-8 align-self-baseline">
-          <h5 class="text-white mb-5">tempo(てんぽ)は飲食店などの実店舗を空き時間に借りたり、貸したりすることができるサービスです.
+          <h5 class="text-white mb-5">tempo(てんぽ)は実店舗を空き時間に借りたり、<br>貸したりすることができるサービスです.
           </h5>
           <a class="btn btn-masthead js-scroll-trigger" href="#about">より詳しく</a>
         </div>
@@ -21,8 +20,7 @@
       <div class="row justify-content-center">
         <div class="col-lg-8 text-center">
           <h2 class="text-black mt-0">tempoとは？</h2>
-          <hr class="divider my-4" />
-          <p class="text-black mb-4">飲食店などのオーナー様は休業日や営業時間外に店舗を一般ユーザー様に貸し出すことができる。一般ユーザー様はオーナー様から店舗を時間単位・日にち単位で借りることができるサービスです.
+          <p class="text-black mb-4">飲食店などのオーナー様は休業日や営業時間外に店舗を一般ユーザー様に貸し出すことができる。<br>一般ユーザー様はオーナー様から店舗を時間単位・日にち単位で借りることができるサービスです.
           <div class="row">
             <div class="col-sm-6">
               <h4 class="textcenter human-think">休業日を作りたい！</h4>
@@ -58,7 +56,6 @@
         </div>
         <div class="col-sm-4 text-center">
           <h3 class="h4 mb-2">パーティーに！</h3>
-          <hr class="divider my-4" />
           <p class="mr-2 ml-2">誕生日や打ち上げなどで貸し切ることも可能！様々なパーティーやイベントスペースとして利用することができます！</p>
         </div>
         <div class="col-sm-4">
@@ -66,7 +63,6 @@
         </div>
         <div class="col-sm-4 text-center">
           <h3 class="h4 mb-2">プチ開業も！</h3>
-          <hr class="divider my-4" />
           <p class="mr-2 ml-2">毎週決まった曜日だけ借りる借りることができれば,
             間借りで開業することだって可能です！</p>
         </div>
@@ -75,7 +71,6 @@
         </div>
         <div class="col-sm-4 text-center">
           <h3 class="h4 mb-2">セミナーの開催に！</h3>
-          <hr class="divider my-4" />
           <p class="mr-2 ml-2">ちゃんとした設備が整っている実店舗だからこそ、食に関するセミナーや講習会なども開催できます！</p>
         </div>
       </div>
@@ -90,17 +85,17 @@
         </div>
       </div>
       <div class="row">
-        <div class="col-lg-4 ml-auto text-center mb-5 mb-lg-0">
+        <div class="col-lg-4 mx-auto text-center mb-5 mb-lg-0 card">
           <img class="img-human" src="/assets/102_h_hoso.png" alt="ユーザー" />
-          <p><%= link_to "ユーザーについて詳しく", u_about_path%>
-          <p><%= link_to "ユーザー会員登録", u_new_path%>
-          <p><%= link_to "ユーザーログイン", user_login_path%>
+          <%= link_to "ユーザーについて詳しく", u_about_path, class: "btn btn-warning" %>
+          <%= link_to "ユーザー会員登録", u_new_path, class: "btn btn-light" %>
+          <%= link_to "ユーザーログイン", user_login_path, class: "btn btn-light" %>
         </div>
-        <div class="col-lg-4 mr-auto text-center">
+        <div class="col-lg-4 mx-auto text-center card">
           <img class="img-shop" src="/assets/1023_hm_h.png" alt="店舗" />
-          <p><%= link_to "オーナーについて詳しく", o_about_path%>
-          <p><%= link_to "オーナー会員登録", o_new_path %>
-          <p><%= link_to "オーナーログイン", owner_login_path %>
+          <%= link_to "オーナーについて詳しく", o_about_path, class: "btn btn-light" %>
+          <%= link_to "オーナー会員登録", o_new_path, class: "btn btn-light"  %>
+          <%= link_to "オーナーログイン", owner_login_path, class: "btn btn-light"  %>
         </div>
       </div>
     </div>
