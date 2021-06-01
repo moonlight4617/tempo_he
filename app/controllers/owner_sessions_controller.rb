@@ -32,14 +32,12 @@ class OwnerSessionsController < ApplicationController
   end
 
   def sample_owner
-    @owner = Owner.find(4)
+    @owner = Owner.find_by(email: "sample_owner@gmail.com")
     session[:owner_id] = @owner.id
     if session[:user_id]
       @user = User.find(session[:user_id])
       session.delete(:user_id)
       forget_user(@user)
-      # cookies.delete(:owner_id)
-      # cookies.delete(:owner_remember_token)
     end
     redirect_back_or(s_index_path)
   end

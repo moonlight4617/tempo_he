@@ -1,15 +1,15 @@
 <div class="container-fluid">
   <div class="row">
-    <div class="page-wrapper chiller-theme toggled">
+    <div class="page-wrapper chiller-theme">
 
       <!---サイドバー--->
       <!---ボタン---->
-      <a id="show-sidebar" class="btn btn-md btn-warning" href="#">
+      <a id="show-sidebar" class="btn btn-md" href="#">
         <i class="fas fa-bars"></i>
       </a>
       <!---ボタン--->
 
-      <nav id="sidebar" class="sidebar-wrapper bg-warning">
+      <nav id="sidebar" class="sidebar-wrapper">
         <div class="sidebar-content">
           <div class="sidebar-brand">
             <div id="close-sidebar">
@@ -21,10 +21,10 @@
           <table class="table">
             <%= form_with model: @shop, url: s_pref_path, local: true, method: 'get' do |f| %>
             <tr>
-              <th class="text-center">絞り込み検索</th>
+              <th id="side-title" class="text-center">絞り込み検索</th>
             </tr>
             <tr>
-              <th>関東</th>
+              <th id="side-item">関東</th>
             </tr>
             <tr>
               <td><%= f.radio_button  :prefecture, "東京" %>
@@ -55,7 +55,7 @@
                 <%= f.label :prefecture, "群馬" %></td>
             </tr>
             <tr>
-              <th>特徴タグ</th>
+              <th id="side-item">特徴タグ</th>
             </tr>
             <%= f.collection_check_boxes :tags, Tag.all, :id, :name , include_hidden: false do |b| %>
             <tr>
@@ -79,15 +79,23 @@
           <% @shops.each do |shop| %>
           <% if shop.del_flg != 1 %>
           <div class="col-lg-4">
-            <div class="card mb-2">
+            <div id="shop-card" class="card mb-5">
               <%= link_to s_show_path(shop) do %>
               <%= image_tag shop.image.url, class: 'img-thumbnail' %>
               <% end %>
-              <div class="row card-body">
-                <p class="mt-2"><%= shop.name %></p>
+              <div class="card-body">
+                <h5 class="card-title"><%= shop.name %></h5>
                 <p><%= shop.station %>駅</p>
                 <p>基本料金：¥ <%= shop.price %>/h</p>
-                <%= link_to "店舗詳細", s_show_path(shop) %>
+                <p>特徴タグ：<% shop.tags.each do |tag| %>
+                  <span id="tag" class="badge rounded-pill text-white">
+                    <%= tag.name %>
+                  </span>
+                  <% end %>
+                </p>
+                <div class="text-right">
+                  <%= link_to "店舗詳細", s_show_path(shop), class: "btn btn-light" %>
+                </div>
               </div>
             </div>
           </div>
@@ -110,10 +118,10 @@
 </div>
 
 <script>
-  $("#close-sidebar").click(function() {
-    $(".page-wrapper").removeClass("toggled");
-  });
   $("#show-sidebar").click(function() {
     $(".page-wrapper").addClass("toggled");
+  });
+  $("#close-sidebar").click(function() {
+    $(".page-wrapper").removeClass("toggled");
   });
 </script>
