@@ -1,7 +1,10 @@
 <section class="container">
   <h3>マイアカウント</h3>
   <p>オーナー：<%= @owner.name %>
+    <!-- 登録店舗があれか -->
+    <% if @shops.present? %>
     <% @shops.each do |shop| %>
+    <!-- 店舗が削除されてなければ -->
     <% if shop.del_flg != 1 %>
   <div class="row">
     <%= image_tag shop.image.url , class: "rounded mx-auto d-block col-6" %>
@@ -11,6 +14,7 @@
   <!----予約カレンダー---->
   <p>今後の予約</p>
   <% calendars = Calendar.where(shop_id: shop.id , rent_date: Date.today..Float::INFINITY)%>
+  <!-- 予約が入ってれば -->
   <% if calendars.present?%>
   <% calendars.each do |cal|%>
   <ul>
@@ -21,10 +25,11 @@
     </p>
   </ul>
   <% end %>
+  <!-- 予約がなければ -->
   <% else %>
   <p>＜予約はまだありません＞</p>
   <% end %>
-  <!----予約カレンダー---->
+  <!----予約カレンダー終わり---->
 
   <%= link_to "店舗詳細", s_show_path(shop), class: "btn btn-outline-primary" %>
   <span>
@@ -35,7 +40,7 @@
   <% end %>
   <hr>
   <% end %>
-  </div>
+  <% end %>
   <%= link_to "新しく店舗を登録する", s_new_path %><br>
   <%= link_to "オーナーアカウントの編集", o_edit_path %><br>
 </section>

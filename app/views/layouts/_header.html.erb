@@ -42,7 +42,7 @@
             <% owner_id =  session[:owner_id] %>
             <% shop = Shop.find_by(owner_id: owner_id) %>
             <%= link_to "マイアカウント", o_show_path, class: "dropdown-item" %>
-            <%= link_to "メッセージ", ch_index_owner_path(shop), class: "dropdown-item" %>
+            <%= link_to "メッセージ", ch_index_owner_path(shop), class: "dropdown-item" if shop.present? %>
             <%= link_to "ログアウト", owner_logout_path, method: :delete, class: "dropdown-item" %>
             <% else %>
             <%= link_to "ログイン", owner_login_path, class: "dropdown-item" %>
