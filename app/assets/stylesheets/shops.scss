@@ -63,7 +63,15 @@
 }
 
 #tag{
-  background-color: #7b684b;
+  background-color: #53777a;
+}
+
+#show-shop{
+  color: #fff;
+  background-color: #d95b43;
+}
+
+#shop-thumbnail{
 }
 
 /*----------------page-wrapper----------------*/
@@ -111,15 +119,22 @@
 /*----------------sidebar-wrapper----------------*/
 
 #sidebar{
-  background-color: rgb(247, 195, 117);
+  background-color: #ecd078;
 }
 
 #side-title{
-  background-color: rgb(211, 128, 39);
+  background-color: #542437;
+  color: #fff;
 }
 
 #side-item{
-  background-color: #f4bb00;
+  background-color: #c02942;
+  color: #fff;
+}
+
+#search-submit{
+  background-color: #d95b43;
+  color: #fff;
 }
 
 .sidebar-wrapper {
