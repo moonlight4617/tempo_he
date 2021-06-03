@@ -81,7 +81,7 @@
           <div class="col-lg-4">
             <div id="shop-card" class="card mb-5">
               <%= link_to s_show_path(shop) do %>
-              <%= image_tag shop.image.url, id: "shop-thumbnail", class: "img-thumbnail" %>
+              <%= image_tag shop.image.url, id: "shop-thumbnail", class: "img-fluid" %>
               <% end %>
               <div class="card-body">
                 <h5 class="card-title"><%= shop.name %></h5>
@@ -94,7 +94,7 @@
                   <% end %>
                 </p>
                 <div class="text-right">
-                  <%= link_to "店舗詳細 > ", s_show_path(shop), id: "show-shop", class: "btn" %>
+                  <%= link_to "店舗詳細 > ", s_show_path(shop), id: "show-shop", class: "btn mt-1" %>
                 </div>
               </div>
             </div>

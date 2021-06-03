@@ -1,5 +1,5 @@
 <h3>予約日時</h3>
-
+<% if @calendars.present? %>
 <p>店舗：<%= @calendars[0].shop.name %></p>
 <% @calendars.each.with_index do |cal, i| %>
 <p>予約<%= i + 1 %></p>
@@ -8,3 +8,7 @@
   <li>開始時刻<%= cal.start_time %></li>
 </ul>
 <% end %>
+<% else %>
+今後の予約はありません。
+<% end %>
+<%= link_to "店舗詳細へ戻る", s_show_path(@calendars[0].shop), class: "btn btn-light mt-0 mr-2" %>
