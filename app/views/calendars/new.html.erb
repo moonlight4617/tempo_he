@@ -5,7 +5,7 @@
         <%= form_for(:calendar, url:{controller: 'calendars', action: 'confirm' }, html: {method: 'GET'}) do |f| %>
         <table class="table table-striped mx-auto">
           <thead>
-            <tr class="thead-dark">
+            <tr id="thead">
               <th>
                 <% if @t.first.to_date > Date.today%>
                 <%= f.submit "前の週へ", :name => 'prev' %>
@@ -41,8 +41,10 @@
             </tr>
           </tbody>
         </table>
-        <%= f.submit "申し込み画面へ", class: "btn btn-light" %>
-        <%= link_to "店舗に質問を送る", ch_show_path, class: "btn btn-light" %>
+        <div class="text-center pt-1">
+          <%= f.submit "申し込み画面へ", class: "btn btn-light mt-1" %>
+          <%= link_to "店舗に質問を送る", ch_show_path, class: "btn btn-light mt-1 ml-3" %>
+        </div>
         <% end%>
       </div>
     </div>
