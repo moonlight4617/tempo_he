@@ -90,9 +90,9 @@ before_action :set_shop, except: :index_for_user
     end
   end
 
-  # オーナーに対して、今入っている予約一覧の表示
+  # ユーザーに対して、今入っている予約一覧の表示
   def s_index
-    @calendars = @shop.calendars.where(user_id: session[:user_id])
+    @calendars = @shop.calendars.where(user_id: session[:user_id]).where(rent_date: Date.today..Float::INFINITY)
   end
 
   private
@@ -103,15 +103,15 @@ before_action :set_shop, except: :index_for_user
 
     # 予約できる時間の設定。店舗が時間設定していればその通りの時間を。設定していなければデフォルトで9-23時を登録
     def set_business_time
-      if @shop.business_time 
-        able_time = @shop.business_time
-        slim_time = able_time.split(",")
-        slim_time[0] = slim_time.first.delete("[")
-        slim_time[-1] = slim_time.last.delete("]")
-        @able_time = slim_time
-      else
-        @able_time = (9..23).to_a
-      end
+      # if @shop.business_time.present?
+      #   able_time = @shop.business_time
+      #   slim_time = able_time.split(",")
+      #   slim_time[0] = slim_time.first.delete("[")
+      #   slim_time[-1] = slim_time.last.delete("]")
+      #   @able_time = slim_time
+      # else
+        @able_time = (0..23).to_a
+      # end
     end
 
     def set_calendar

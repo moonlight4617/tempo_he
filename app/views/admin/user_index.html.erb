@@ -1,0 +1,15 @@
+<h1>ユーザー 一覧</h1>
+<% @users.each do |user| %>
+<ul>
+  <li>
+    ID：<%= user.id %>
+  </li>
+  <li>
+    ユーザー名：<%= link_to "#{user.name}", admin_user_ind_path(user.public_uid) %>
+  </li>
+  <li>
+    Eメール：<%= user.email %>
+  </li>
+  <hr>
+</ul>
+<% end %>

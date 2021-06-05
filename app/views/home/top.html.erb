@@ -15,22 +15,22 @@
     </div>
   </header>
   <!-- About-->
-  <section class="page-section bg-about" id="about">
+  <section class="" id="about">
     <div class="container">
       <div class="row justify-content-center">
         <div class="col-lg-8 text-center">
-          <h2 class="text-black mt-0">tempoとは？</h2>
-          <p class="text-black mb-4">飲食店などのオーナー様は休業日や営業時間外に店舗を一般ユーザー様に貸し出すことができる。<br>一般ユーザー様はオーナー様から店舗を時間単位・日にち単位で借りることができるサービスです.
+          <h2 class="text-black mt-0 mb-5">tempoとは？</h2>
+          <h5 class="text-black mb-4 sentence">飲食店などのオーナー様は休業日や営業時間外に店舗を一般ユーザー様に貸し出すことができる。<br>一般ユーザー様はオーナー様から店舗を時間単位・日にち単位で借りることができるサービスです。</h5>
           <div class="row">
             <div class="col-sm-6">
-              <h4 class="textcenter human-think">休業日を作りたい！</h4>
+              <h5 class="textcenter human-think">休業日を作りたい！</h5>
               <img class="img-fluid icon-owner" src="/assets/42374.png" alt="オーナー" />
               <p>店舗オーナー</p>
               <img class="img-fluid down-arrow" src="/assets/396.png" alt="下矢印" />
               <h4 class="human-says">貸し出す時間を登録！</h4>
             </div>
             <div class="col-sm-6">
-              <h4 class="textcenter human-think">貸し切りパーティしたい！</h4>
+              <h5 class="textcenter human-think">貸し切りパーティしたい！</h5>
               <img class="img-fluid icon-user" src="/assets/46474.png" alt="ユーザー" />
               <p>ユーザー</p>
               <img class="img-fluid down-arrow" src="/assets/396.png" alt="下矢印" />
@@ -47,7 +47,7 @@
     </div>
   </section>
   <!-- Portfolio-->
-  <h2 class="port-h2">利用シーンは様々！</h2>
+  <h2 class="port-h2 my-5">利用シーンは様々！</h2>
   <div id="portfolio">
     <div class="container-fluid p-0">
       <div class="row no-gutters">
@@ -55,49 +55,53 @@
           <img class="img-fluid" src="/assets/1186716_s.jpg" alt="パーティシーン" />
         </div>
         <div class="col-sm-4 text-center">
-          <h3 class="h4 mb-2">パーティーに！</h3>
-          <p class="mr-2 ml-2">誕生日や打ち上げなどで貸し切ることも可能！様々なパーティーやイベントスペースとして利用することができます！</p>
+          <h3 class="h4 my-4">パーティーに！</h3>
+          <h5 class="mx-4 sentence">誕生日や打ち上げなどで貸し切ることも可能！様々なパーティーやイベントスペースとして利用することができます！</h5>
         </div>
         <div class="col-sm-4">
           <img class="img-fluid" src="/assets/1186716_s.jpg" alt="パーティシーン" />
         </div>
         <div class="col-sm-4 text-center">
-          <h3 class="h4 mb-2">プチ開業も！</h3>
-          <p class="mr-2 ml-2">毎週決まった曜日だけ借りる借りることができれば,
-            間借りで開業することだって可能です！</p>
+          <h3 class="h4 my-4">プチ開業も！</h3>
+          <h5 class="mx-4 sentence">毎週決まった曜日だけ借りる借りることができれば,
+            間借りで開業することだって可能です！</h5>
         </div>
         <div class="col-sm-4">
           <img class="img-fluid" src="/assets/867865_s.jpg" alt="" />
         </div>
         <div class="col-sm-4 text-center">
-          <h3 class="h4 mb-2">セミナーの開催に！</h3>
-          <p class="mr-2 ml-2">ちゃんとした設備が整っている実店舗だからこそ、食に関するセミナーや講習会なども開催できます！</p>
+          <h3 class="h4 my-4">セミナーの開催に！</h3>
+          <h5 class="mx-4 sentence">ちゃんとした設備が整っている実店舗だからこそ、食に関するセミナーや講習会なども開催できます！</h5>
         </div>
       </div>
     </div>
   </div>
-  <!-- Contact-->
-  <section class="page-section" id="contact">
-    <div class="container">
-      <div class="row justify-content-center">
-        <div class="col-lg-8 text-center">
-          <h2 class="mt-0">会員になってサービスを利用しましょう！</h2>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-lg-4 mx-auto text-center mb-5 mb-lg-0 card">
-          <img class="img-human" src="/assets/102_h_hoso.png" alt="ユーザー" />
-          <%= link_to "ユーザーについて詳しく", u_about_path, class: "btn btn-warning" %>
-          <%= link_to "ユーザー会員登録", u_new_path, class: "btn btn-light" %>
-          <%= link_to "ユーザーログイン", user_login_path, class: "btn btn-light" %>
-        </div>
-        <div class="col-lg-4 mx-auto text-center card">
-          <img class="img-shop" src="/assets/1023_hm_h.png" alt="店舗" />
-          <%= link_to "オーナーについて詳しく", o_about_path, class: "btn btn-light" %>
-          <%= link_to "オーナー会員登録", o_new_path, class: "btn btn-light"  %>
-          <%= link_to "オーナーログイン", owner_login_path, class: "btn btn-light"  %>
-        </div>
+
+</div>
+
+<!-- Contact-->
+<section class="mt-5" id="contact">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-lg-8 text-center">
+        <h2 class="mt-0" id="tomember">会員になってサービスを利用しましょう！</h2>
       </div>
     </div>
-  </section>
-</div>
+    <div class="row">
+      <div class="col-sm-10 col-md-2 ml-auto text-center mb-4">
+        <img class="img-human" src="/assets/102_h_hoso.png" alt="ユーザー" />
+      </div>
+      <div class="col-md-3 col-sm-10">
+        <%= link_to "ユーザー会員登録", u_new_path, class: "btn btn-light" %>
+        <%= link_to "ユーザーログイン", user_login_path, class: "btn btn-light" %>
+      </div>
+      <div class="col-sm-10 col-md-2 ml-auto text-center">
+        <img class="img-shop" src="/assets/1023_hm_h.png" alt="店舗" />
+      </div>
+      <div class="col-md-3 col-sm-10">
+        <%= link_to "オーナー会員登録", o_new_path, class: "btn btn-light"  %>
+        <%= link_to "オーナーログイン", owner_login_path, class: "btn btn-light"  %>
+      </div>
+    </div>
+  </div>
+</section>

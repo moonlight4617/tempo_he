@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_05_27_043340) do
+ActiveRecord::Schema.define(version: 2021_06_04_130935) do
 
   create_table "availables", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "rent_date"
@@ -58,7 +58,7 @@ ActiveRecord::Schema.define(version: 2021_05_27_043340) do
   create_table "owners", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name"
     t.string "address"
-    t.integer "tel"
+    t.string "tel"
     t.string "email"
     t.string "password_digest"
     t.integer "del_flg"
@@ -72,7 +72,7 @@ ActiveRecord::Schema.define(version: 2021_05_27_043340) do
     t.string "prefecture"
     t.string "city"
     t.string "address"
-    t.integer "tel"
+    t.string "tel"
     t.string "station"
     t.integer "capacity"
     t.string "image"
@@ -106,7 +106,7 @@ ActiveRecord::Schema.define(version: 2021_05_27_043340) do
 
   create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "address"
-    t.integer "tel"
+    t.string "tel"
     t.string "email"
     t.string "password_digest"
     t.integer "del_flg"
@@ -116,6 +116,7 @@ ActiveRecord::Schema.define(version: 2021_05_27_043340) do
     t.string "remember_digest"
     t.string "image"
     t.string "public_uid"
+    t.integer "admin"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["public_uid"], name: "index_users_on_public_uid", unique: true
   end

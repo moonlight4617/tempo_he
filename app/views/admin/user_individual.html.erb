@@ -1,0 +1,37 @@
+<div class="container">
+  <h3 class="text-center"><%= @user.name %> アカウント</h3>
+  <div class="row">
+    <div class="col-lg-4 col-sm-12">
+      <%= image_tag @user.image.url, width: "250" %>
+    </div>
+    <div class="col-lg-8 col-sm-12">
+      ユーザー名：<%= @user.name %><br>
+      Eメール：<%= @user.email %><br>
+      住所：<%= @user.address %><br>
+      電話番号：<%= @user.tel %><br>
+      アカウント作成日：<%= @user.created_at %><br>
+      <i class="far fa-star"></i>
+      <i class="far fa-star"></i>
+      <i class="far fa-star"></i><br>
+      <p>口コミ評価：口コミ評価の本文口コミ評価の本文口コミ評価の本文口コミ評価の本文口コミ評価の本文口コミ評価の本文口コミ評価の本文</p>
+      <%= link_to "登録情報編集", admin_user_edit_path(@user), class: "btn btn-light mb-4 mt-1" %><br>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-lg-6 col-sm-12">
+      <h2>予約</h2>
+      <% if @user.calendars.present? %>
+      <ul>
+        <% @user.calendars.each do |calendar| %>
+        <li>日付：<%= calendar.rent_date %></li>
+        <li>時間：<%= calendar.start_time %></li>
+        <li>店名：<%= calendar.shop.name %></li>
+        <hr>
+        <% end %>
+        <% else %>
+        <p>予約した店舗はありません</p>
+      </ul>
+      <% end %>
+    </div>
+  </div>
+</div>

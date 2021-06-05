@@ -52,6 +52,14 @@
           </div>
         </li>
         <% end %>
+        <% if session[:user_id].present? && User.find(session[:user_id]).admin == 1 %>
+        <li>
+          <%= link_to "管理者 ユーザー 一覧", admin_user_path, class: "dropdown-item" %>
+        </li>
+        <li>
+          <%= link_to "管理者 オーナー 一覧", admin_owner_path, class: "dropdown-item" %>
+        </li>
+        <% end %>
       </ul>
     </div>
   </div>

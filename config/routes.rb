@@ -76,6 +76,19 @@ Rails.application.routes.draw do
   # tag_to_shops
   delete 'shops/:id/tag/:id/delete', to: 'tag_to_shops#delete', as: 'tag_delete'
 
-  
+  # admin_user
+  get 'admin/user_index', to: 'admin#user_index', as: 'admin_user'
+  get 'admin/user_individual', to: 'admin#user_individual', as: 'admin_user_ind'
+  get 'admin/user_edit', to: 'admin#user_edit', as: 'admin_user_edit'
+  patch 'admin/user_update', to: 'admin#user_update', as: 'admin_user_update'
+  patch 'admin/user_destroy', to: 'admin#user_destroy', as: 'admin_user_destroy'
+
+  # admin_owner&shop
+  get 'admin/owner_index', to: 'admin#owner_index', as: 'admin_owner'
+  get 'admin/shop_show/:id', to: 'admin#shop_show', as: 'admin_shop'
+  get 'admin/shop_edit/:id', to: 'admin#shop_edit', as: 'admin_shop_edit'
+  patch 'admin/shop_update/:id', to: 'admin#shop_update', as: 'admin_shop_update'
+  patch 'admin/shop_destroy/:id', to: 'admin#shop_destroy', as: 'admin_shop_destroy'
+
   get 'test', to: 'home#test', as: 'test'
 end

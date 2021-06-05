@@ -1,15 +1,27 @@
 @charset "UTF-8";
 
 #header{
-  background-color: #ff9b00;
+  background-color: #ecd078;
 }
 
 #body{
-  background-color: #fae2a9;
+  background-color: #ecd078;
 }
 
 #shop-card{
-  background-color: #fdbe5e;
+  background-color: #fff;
+}
+
+#contact{
+  background-color: #53777a;
+}
+
+#tomember{
+  color: #fff;
+}
+
+.sentence{
+  line-height: 1.4;
 }
 
 :root {
@@ -510,15 +522,6 @@ mark,
 }
 
 .img-fluid {
-  max-width: 100%;
-  height: auto;
-}
-
-.img-thumbnail {
-  padding: 0.25rem;
-  background-color: #fff;
-  border: 1px solid #dee2e6;
-  border-radius: 0.25rem;
   max-width: 100%;
   height: auto;
 }

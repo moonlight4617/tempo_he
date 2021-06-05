@@ -1,44 +1,52 @@
-<div class="table">
-  <%= form_for(:calendar, url:{controller: 'calendars', action: 'confirm' }, html: {method: 'GET'}) do |f| %>
-  <table>
-    <thead>
-      <tr class="thead-dark">
-        <th>
-          <% if @t.first.to_date > Date.today%>
-          <%= f.submit "前の週へ", :name => 'prev' %>
-          <% end %>
-        </th>
-        <th colspan=6 class="text-center"><%= @year_month %></th>
-        <th>
-          <%= f.hidden_field :day, value: @today %>
-          <%= f.submit "次の週へ", :name => 'next'%>
-        </th>
-      </tr>
-    </thead>
-    <tbody>
+<div class="container mt-5">
+  <div class="row">
+    <div class="col-lg-6 col-sm-10 mx-auto">
+      <div>
+        <%= form_for(:calendar, url:{controller: 'calendars', action: 'confirm' }, html: {method: 'GET'}) do |f| %>
+        <table class="table table-striped mx-auto">
+          <thead>
+            <tr id="thead">
+              <th>
+                <% if @t.first.to_date > Date.today%>
+                <%= f.submit "前の週へ", :name => 'prev' %>
+                <% end %>
+              </th>
+              <th colspan=6 class="text-center"><%= @year_month %></th>
+              <th>
+                <%= f.hidden_field :day, value: @today %>
+                <%= f.submit "次の週へ", :name => 'next'%>
+              </th>
+            </tr>
+          </thead>
+          <tbody>
 
-      <tr class="thead-light">
-        <th></th>
-        <% @week.each do |day| %>
-        <th class="text-center"><%= day.mday %><%= "(" + %w[日 月 火 水 木 金 土][day.wday] + ")" %></th>
-        <% end %>
-      </tr>
-      <% @able_time.each do |hour| %>
-      <tr>
-        <th><%= hour %>:00</th>
-        <% 7.times do %>
-        <% cal_date = @t.slice!(0)%>
-        <% if !@available.include?(cal_date) %>
-        <td class="text-center">x</td>
-        <% else %>
-        <td class="text-center"><%= f.check_box :rent_date, {multiple: true}, cal_date, nil %></td>
+            <tr>
+              <th></th>
+              <% @week.each do |day| %>
+              <th class="text-center"><%= day.mday %><%= "(" + %w[日 月 火 水 木 金 土][day.wday] + ")" %></th>
+              <% end %>
+            </tr>
+            <% @able_time.each do |hour| %>
+            <tr>
+              <th><%= hour %>:00</th>
+              <% 7.times do %>
+              <% cal_date = @t.slice!(0)%>
+              <% if !@available.include?(cal_date) %>
+              <td class="text-center">x</td>
+              <% else %>
+              <td class="text-center"><%= f.check_box :rent_date, {multiple: true}, cal_date, nil %></td>
+              <% end%>
+              <% end %>
+              <% end %>
+            </tr>
+          </tbody>
+        </table>
+        <div class="text-center pt-1">
+          <%= f.submit "申し込み画面へ", class: "btn btn-light mt-1" %>
+          <%= link_to "店舗に質問を送る", ch_show_path, class: "btn btn-light mt-1 ml-3" %>
+        </div>
         <% end%>
-        <% end %>
-        <% end %>
-      </tr>
-    </tbody>
-  </table>
-  <%= f.submit "申し込み画面へ", class: "btn btn-primary" %>
-  <% end%>
-  <%= link_to "店舗に質問を送る", ch_show_path, class: "btn btn-outline-primary" %>
+      </div>
+    </div>
+  </div>
 </div>

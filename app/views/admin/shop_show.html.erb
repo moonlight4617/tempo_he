@@ -1,0 +1,28 @@
+<div class="container">
+  <%= image_tag @shop.image.url, class: "rounded mx-auto my-4 d-block col-lg-6 col-sm-10" %><br>
+  <div class="col-lg-6 col-sm-10 mx-auto">
+    <h3><%= @shop.name %></h3>
+    <p>オーナー：<%= @shop.owner.name %>
+    <h5>店舗詳細</h5>
+    <p>住所：<%= @shop.prefecture %><%= @shop.city %><%= @shop.address %>
+    <p>最寄り駅：<%= @shop.station %>
+    <p>席数：<%= @shop.capacity %>
+    <p>基本料金：<%= @shop.price %>
+    <p>紹介文：<%= @shop.content %>
+    <p>特徴タグ：
+      <% if @tags %>
+      <% @tags .each do |tag| %>
+      <span class="badge rounded-pill bg-secondary text-white">
+        <%= tag.name %>
+      </span>
+      <% end %>
+      <% end %>
+      <br>
+      <%= link_to "予約枠の開放", "#", type: "button", class: "btn btn-light my-4 mr-2"%>
+      <%= link_to "店舗情報編集", admin_shop_edit_path(@shop), type: "button", class:"btn btn-light my-4 mr-2" %>
+      <%= link_to "質問を送る", "#", type: "button", class: "btn btn-light my-4 mr-2" %>
+      <%= link_to "予約日時選択", "#", type: "button", class: "btn btn-light my-4 mr-2" %>
+      <%= link_to "申込予約一覧", "#", type: "button", class: "btn btn-light my-4 mr-2" %>
+      <%= link_to "店舗一覧へ戻る", "#", type: "button", class: "btn btn-light my-4 mr-2" %><br>
+  </div>
+</div>

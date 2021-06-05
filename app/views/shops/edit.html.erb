@@ -1,6 +1,6 @@
 <div class="container">
   <h3 class="text-center">店舗編集</h3>
-  <div class="form-group">
+  <div class="form-group container col-lg-6 col-sm-10">
     <%= form_for(@shop, url: {controller: 'shops', action: 'update'}) do |f| %>
     <%= render '/layouts/error_messages' %>
     <%= f.label :name, "店舗名" %><span class="required"> *必須項目</span>
@@ -8,7 +8,7 @@
     <%= f.label :zip_code, "郵便番号" %><span class="required"> *必須項目</span>
     <%= f.text_field :zip_code, id:'zip_code'%>
     <button type="button" id='search'>住所自動入力</button><br>
-    <%= f.label :prefecture, "都道府県" %><span class="required"> *必須項目</span>
+    <%= f.label :prefecture, "都道府県" , class: "mt-3" %><span class="required"> *必須項目</span>
     <%= f.text_field :prefecture, class: "form-control", id: "pref_name" %><br>
     <%= f.label :city, "市町村" %><span class="required"> *必須項目</span>
     <%= f.text_field :city, class: "form-control", id: "city" %><br>
@@ -53,9 +53,9 @@
     <hr>
     <%= f.label :image, "画像" %>
     <%= f.file_field :image , class: "mb-4" %><br>
-    <%= f.submit label='登録', class: "btn btn-primary btn-lg btn-block" %>
+    <%= f.submit label='登録', class: "btn btn-light d-grid gap-2 col-lg-6 mx-auto mt-4" %>
     <% end %>
-    <%= link_to "店舗を削除する", s_destroy_path, method: "patch", data: { confirm: "一度、削除すると元に戻せません。本当に店舗そのものを削除しますか？" }, type: "button", class: "btn btn-outline-danger" %>
+    <%= link_to "店舗を削除する", s_destroy_path, method: "patch", data: { confirm: "一度、削除すると元に戻せません。本当に店舗そのものを削除しますか？" }, type: "button", class: "btn btn-danger d-grid gap-2 col-lg-4 mx-auto" %>
   </div>
 </div>
 
