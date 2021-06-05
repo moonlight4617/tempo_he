@@ -3,6 +3,8 @@ class ShopsController < ApplicationController
   before_action :set_owner, only: [:create, :show]
   before_action :before_login_owner, only: [:new, :create, :edit, :update, :destroy]
   before_action :correct_owner, only: [:edit, :update, :destroy]
+
+  include UserSessionsHelper
   
   def index
     @shops = Shop.all.includes(:tags).page(params[:page]).per(50)
@@ -220,7 +222,10 @@ class ShopsController < ApplicationController
     def correct_owner
       set_shop
       set_owner
-      if @shop.owner != @owner
+      if current_user.admin == 1
+        true
+      elsif @shop.owner != @owner
+        flash[:danger] = "オーナー権限がありません"
         redirect_to root_path
       end
     end

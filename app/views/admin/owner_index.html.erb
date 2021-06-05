@@ -1,0 +1,23 @@
+<h1>オーナー 一覧</h1>
+<% @owners.each do |owner| %>
+<ul>
+  <li>
+    ID：<%= owner.id %>
+  </li>
+  <li>
+    オーナー名：<%= link_to "#{owner.name}", o_show_path(owner) %>
+  </li>
+  <li>
+    Eメール：<%= owner.email %>
+  </li>
+  <% if owner.shops.present? %>
+  登録店舗：
+  <% owner.shops.each do |shop| %>
+  <li>
+    <%= link_to "#{shop.name}", admin_shop_path(shop.id) %>
+  </li>
+  <% end %>
+  <% end %>
+  <hr>
+</ul>
+<% end %>

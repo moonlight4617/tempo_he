@@ -1,7 +1,7 @@
 <div class="container">
   <h3 class="text-center">店舗編集</h3>
   <div class="form-group container col-lg-6 col-sm-10">
-    <%= form_for(@shop, url: {controller: 'shops', action: 'update'}) do |f| %>
+    <%= form_with model: @shop, url: admin_shop_update_path, local: true do |f| %>
     <%= render '/layouts/error_messages' %>
     <%= f.label :name, "店舗名" %><span class="required"> *必須項目</span>
     <%= f.text_field :name, class: "form-control" %><br>
@@ -55,7 +55,7 @@
     <%= f.file_field :image , class: "mb-4" %><br>
     <%= f.submit label='登録', class: "btn btn-light d-grid gap-2 col-lg-6 mx-auto mt-4" %>
     <% end %>
-    <%= link_to "店舗を削除する", s_destroy_path, method: "patch", data: { confirm: "一度、削除すると元に戻せません。本当に店舗そのものを削除しますか？" }, type: "button", class: "btn btn-danger d-grid gap-2 col-lg-4 mx-auto" %>
+    <%= link_to "店舗を削除する", admin_shop_destroy_path, method: "patch", data: { confirm: "一度、削除すると元に戻せません。本当に店舗そのものを削除しますか？" }, type: "button", class: "btn btn-danger d-grid gap-2 col-lg-4 mx-auto" %>
   </div>
 </div>
 
