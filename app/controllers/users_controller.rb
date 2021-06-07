@@ -20,19 +20,12 @@ class UsersController < ApplicationController
   end
 
   def show
-    # @calendars = Calendar.where(user_id: session[:user_id]).select(:shop_id).distinct
-
     @calendars = Calendar.where(user_id: session[:user_id])
     shop_id = @calendars.select(:shop_id).distinct.pluck(:shop_id)
     @newest_reserve = []
     shop_id.each do |shop|
-      @newest_reserve.push(@calendars.where(shop_id: shop).order(:rent_date).last)
+      @newest_reserve.push(@calendars.where(shop_id: shop).order(:rent_date, :start_time).last)
     end
-
-    # @newest_calendars = Calendar.where(user_id: session[:user_id]).order(:rent_date).last
-
-    # @oldest_calendars = Calendar.where(user_id: session[:user_id]).order(rent_date: "DESC").last
-
   end
 
   def edit

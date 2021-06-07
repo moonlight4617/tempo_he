@@ -59,11 +59,11 @@ station = Faker::Mountain.name
 #   name: "テラス席あり"
 # )
 
-# User.create!(
-#   name: "sample_user",
-#   email: "sample_user@gmail.com",
-#   password: "12345678",
-# )
+User.create!(
+  name: "sample_user",
+  email: "sample_user@gmail.com",
+  password: "12345678",
+)
 
 owner = Owner.create!(
   name: "sample_owner",
