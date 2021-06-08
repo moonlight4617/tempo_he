@@ -1,21 +1,21 @@
 <div class="js-message-errors"></div>
-<table>
+<table class="table table-striped mx-auto">
   <thead>
-    <tr class="thead-dark">
+    <tr id="thead">
       <th>
         <% session[:day] = @available_days %>
         <% if @t.first.to_date > Date.today%>
-        <%= link_to "前の週へ", s_prev_path(@shop, today:@today, day:available_days) %>
+        <%= link_to "前の週へ", s_prev_path(@shop, today:@today, day:available_days), class: 'btn btn-secondary mt-0'  %>
         <% end %>
       </th>
       <th colspan=6 class="text-center"><%= @year_month %></th>
       <th>
-        <%= link_to "次の週へ", s_next_path(@shop, today:@today, day:available_days) %>
+        <%= link_to "次の週へ", s_next_path(@shop, today:@today, day:available_days), class: 'btn btn-secondary mt-0'  %>
       </th>
     </tr>
   </thead>
   <tbody>
-    <tr class="thead-light">
+    <tr>
       <th></th>
       <% @week.each do |day| %>
       <th class="text-center"><%= day.mday %><%= "(" + %w[日 月 火 水 木 金 土][day.wday] + ")" %></th>
