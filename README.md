@@ -57,6 +57,7 @@ https://tempo-heroku.herokuapp.com/
 ユーザーにとって
 - 「実際にお店を出したい」と思っても、店舗取得費用などに高額のお金がかかり、かなりのリスクをとることになってしまう
 - 貸し切りパーティーや、セミナーなどを開催する場所が見つからない<br>
+
 こういった課題を解決します。
 
 
@@ -70,17 +71,3 @@ Ruby 2.7.3
 
 * System dependencies
 Rails 5.2.6
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
