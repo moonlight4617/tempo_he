@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'evaluations/new'
   root to: 'home#top'
   
   #owner_sessions
@@ -61,6 +62,7 @@ Rails.application.routes.draw do
   #users
   get 'users/new', to: 'users#new', as: 'u_new'
   get 'users/show', to: 'users#show', as: 'u_show'
+  get 'users/show_for_owner', to: 'users#show_for_owner', as: 'u_show_for_owner'
   get 'users/edit', to: 'users#edit', as: 'u_edit'
   get 'users/about', to: 'users#about', as: 'u_about'
   post 'users/new', to: 'users#create', as: 'u_create'
@@ -89,6 +91,12 @@ Rails.application.routes.draw do
   get 'admin/shop_edit/:id', to: 'admin#shop_edit', as: 'admin_shop_edit'
   patch 'admin/shop_update/:id', to: 'admin#shop_update', as: 'admin_shop_update'
   patch 'admin/shop_destroy/:id', to: 'admin#shop_destroy', as: 'admin_shop_destroy'
+
+  # evaluations
+  get 'evaluations/:id/new', to: 'evaluations#new', as: 'e_new'
+  post 'evaluations/:id/create', to: 'evaluations#create', as: 'e_create'
+  post 'evaluations/:id/like', to: 'evaluations#like', as: 'e_like'
+  delete 'evaluations/:id/dislike', to: 'evaluations#dislike', as: 'e_dislike'
 
   get 'test', to: 'home#test', as: 'test'
 end

@@ -4,6 +4,7 @@ class User < ApplicationRecord
   mount_uploader :image, ImageUploader
   has_many :calendars
   has_many :chats, foreign_key: :user_id, dependent: :destroy
+  has_many :evaluations, foreign_key: :user_id, dependent: :destroy
   include PublicUid::ModelConcern
   before_save { email.downcase! }
   validates :name, presence: true, length: { maximum: 50 }
@@ -35,6 +36,10 @@ class User < ApplicationRecord
 
   def forget_remember_digest
     update_attribute(:remember_digest, nil)
+  end
+
+  def liked_by?(shop_id)
+    evaluations.where(shop_id: shop_id, favorite: 1).exists?
   end
 
 end

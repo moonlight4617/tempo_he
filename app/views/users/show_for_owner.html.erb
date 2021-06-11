@@ -1,0 +1,26 @@
+<div class="container">
+  <div class="col-10 mx-auto">
+    <div class="row text-center">
+      <h3>ユーザープロフィール</h3>
+    </div>
+    <div class="row">
+      <div class="col-lg-4 col-sm-8 mb-4">
+        <%= image_tag @user.image.url, id: "shop-thumbnail", class: "img-fluid" %>
+      </div>
+      <div class="col-lg-7 col-sm-10 ml-auto">
+        ユーザー名: <%= @user.name %><br>
+        予約件数: <%= @resevation %><br>
+        評価: <%= @rate %>
+      </div>
+    </div>
+    <div class="row">
+      <h5 class="mt-3">口コミ一覧</h5>
+      <% @evaluations.each do |evaluate| %>
+      <ul>
+        <li><%= evaluate.comment %></li>
+      </ul>
+      <% end %>
+    </div>
+    <%= link_to "マイページに戻る", o_show_path, class: "btn btn-light" %>
+  </div>
+</div>

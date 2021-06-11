@@ -1,102 +1,25 @@
-<main class="p-3">
-  <!-- 4個分のタブ -->
-  <ul class="nav nav-tabs">
-    <li class="nav-item">
-      <a href="#photo1" class="nav-link active" data-toggle="tab">タブ１</a>
-    </li>
-    <li class="nav-item">
-      <a href="#photo2" class="nav-link" data-toggle="tab">タブ2</a>
-    </li>
-    <li class="nav-item">
-      <a href="#photo3" class="nav-link" data-toggle="tab">タブ3</a>
-    </li>
-    <li class="nav-item">
-      <a href="#photo4" class="nav-link" data-toggle="tab">タブ4</a>
-    </li>
-  </ul>
+<!----
 
-  <!-- 写真部分 -->
-  <div class="tab-content">
-    <div id="photo1" class="tab-pane active">
-      写真１
-    </div>
-    <div id="photo2" class="tab-pane">
-      写真２
-    </div>
-    <div id="photo3" class="tab-pane">
-      写真３
-    </div>
-    <div id="photo4" class="tab-pane">
-      写真４
-    </div>
-  </div>
-</main>
+12~15時まで予約
+@start_time [12,13,14,22,23]
 
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+def mold_time
+s = start_time.min
+
+while @start_time.include(s) do
+@start_time.include(s)を満たす時のみ繰り返し処理を行う。
+if @start_time.include(s)
+@end_time = s + 1
+@start_time.slice(s)
+end
+s += 1
+end
+
+出てきた@end_timeとsを使ってresevationを1つ作成、保存。
+end
 
 
-reservation.html.erbのコピー
-<p id="register"></p>
-<p><%= @shop.name %>の予約カレンダー</p>
-<%= link_to '予約開放枠の設定', s_modal_path, remote: true, class: "btn btn-lg, btn-primary" %>
+sを1つずつ足して行って、sが配列@start_timeに含まれない値になった時、処理を終了。
+もし、@start_timeに値が残っている場合は再度処理実行。
 
-<!--- registerパーシャルから「登録」された際に下記要素が差し替えられる --->
-<div class="table">
-  <table>
-    <thead>
-      <tr class="thead-dark">
-        <th>
-          <% session[:day] = @available_days %>
-          <% if @t.first.to_date > Date.today%>
-          <%= link_to "前の週へ", s_prev_path(@shop, today:@today) %>
-          <% end %>
-        </th>
-        <th colspan=6 class="text-center"><%= @year_month %></th>
-        <th>
-          <%= link_to "次の週へ", s_next_path(@shop, today:@today) %>
-        </th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr class="thead-light">
-        <th></th>
-        <% @week.each do |day| %>
-        <th class="text-center"><%= day.mday %><%= "(" + %w[日 月 火 水 木 金 土][day.wday] + ")" %></th>
-        <% end %>
-      </tr>
-      <% @able_time.each do |hour| %>
-      <tr>
-        <th id="calender_body"><%= hour %>:00</th>
-        <% 7.times do %>
-        <% cal_date = @t.slice!(0)%>
-        <% if @available_days && @available_days.include?(cal_date) %>
-        <td class="text-center">○</td>
-        <% else %>
-        <td class="text-center">x</td>
-        <% end%>
-        <% end %>
-        <% end %>
-      </tr>
-    </tbody>
-  </table>
-</div>
-
-
-set_reservation_frame.js.erbのコピー
-<%
-=begin%>
-
-$(".table").html("<%= j(render partial: 'calendar', locals: { available_days: @available_days}) %>");
-
-$('#exampleModal').removeClass('show');
-
-$('.modal-backdrop').remove();
-
-$('.modal-open'). removeAttr('style');
-
-$('body').removeClass('modal-open');
-
-<%
-=end%>
+-->

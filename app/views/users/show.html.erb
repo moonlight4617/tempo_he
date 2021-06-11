@@ -19,9 +19,7 @@
       <h2>現在申込中の店舗</h2>
       <% if @newest_reserve != [] %>
       <% @newest_reserve.each do |cal| %>
-      <% if Date.parse(cal.rent_date) >= Date.today && cal.shop.image? %>
-      <%= link_to image_tag(cal.shop.image.url), s_show_path(cal.shop.id)%>
-      <% elsif Date.parse(cal.rent_date) >= Date.today %>
+      <% if Date.parse(cal.rent_date) >= Date.today %>
       <%= link_to cal.shop.name, s_show_path(cal.shop) %><br>
       <% end %>
       <% end %>
@@ -33,10 +31,9 @@
       <h2>過去に利用した店舗</h2>
       <% if @newest_reserve != [] %>
       <% @newest_reserve.each do |cal| %>
-      <% if Date.parse(cal.rent_date) < Date.today && cal.shop.image? %>
-      <%= link_to image_tag(cal.shop.image.url), s_show_path(cal.shop.id)%>
-      <% elsif Date.parse(cal.rent_date) < Date.today %>
-      <%= link_to cal.shop.name, s_show_path(cal.shop) %><br>
+      <% if Date.parse(cal.rent_date) < Date.today %>
+      <%= link_to cal.shop.name, s_show_path(cal.shop.id) %>
+      <%= link_to "評価する", e_new_path(cal.shop.id) unless @user.evaluations.find_by(shop_id: cal.shop.id).present? %>
       <% end %>
       <% end %>
       <% else %>

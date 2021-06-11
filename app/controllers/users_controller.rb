@@ -28,6 +28,14 @@ class UsersController < ApplicationController
     end
   end
 
+  # オーナー側が見るユーザープロフィール
+  def show_for_owner
+    @user = User.find_by(public_uid: params[:format])
+    @resevation = @user.calendars.size
+    @evaluations = Evaluation.where(user_id: @user.id, toshop: nil).limit(10)
+    @rate = Evaluation.where(toshop: nil).average(:rate)
+  end
+
   def edit
   end
 

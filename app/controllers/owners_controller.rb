@@ -20,7 +20,7 @@ class OwnersController < ApplicationController
   end
 
   def show
-    @shops = @owner.shops
+    @shops = @owner.shops.includes(:calendars, :evaluations)
   end
 
   def edit
