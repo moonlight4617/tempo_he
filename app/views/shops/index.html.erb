@@ -85,6 +85,13 @@
               <% end %>
               <div class="card-body">
                 <h5 class="card-title"><%= shop.name %></h5>
+
+                <% if current_user && current_user.liked_by?(shop.id) %>
+                <%= link_to "いいね", e_like_path(shop) %>
+                <% else %>
+                <td>いいね</td>
+                <% end %>
+
                 <p><%= shop.station %>駅</p>
                 <p>基本料金：¥ <%= shop.price %>/h</p>
                 <p>特徴タグ：<% shop.tags.each do |tag| %>

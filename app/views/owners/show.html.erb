@@ -22,7 +22,7 @@
     <div class="row mt-3">
       <div class="col-md-5 col-sm-10 mx-auto">
         <p>今後の予約</p>
-        <% calendars = Calendar.where(shop_id: shop.id , rent_date: Date.today..Float::INFINITY) %>
+        <% calendars = shop.calendars.where(rent_date: Date.today..Float::INFINITY) %>
         <!-- 予約が入ってれば -->
         <% if calendars.present? %>
         <% calendars.each do |cal| %>
@@ -40,14 +40,15 @@
         <% end %>
       </div>
       <div class="col-md-5 col-sm-10 mx-auto">
-        <% past_calendars = Calendar.where(shop_id: shop.id , rent_date: -::Float::INFINITY...Date.today) %>
+        <% past_calendars = shop.calendars.where(rent_date: -::Float::INFINITY...Date.today) %>
         <p>過去の予約</p>
         <% if past_calendars.present? %>
         <% past_calendars.each do |cal| %>
         <ul>
           <li>日付：<%= cal.rent_date %>時間：<%= cal.start_time %></li>
           <p>
-            <%= link_to "予約者：#{cal.user.name}", u_show_path %><br>
+            <%= link_to "予約者：#{cal.user.name}", u_show_for_owner_path(cal.user.public_uid) %><br>
+            <%= link_to "評価する", e_new_path(id: shop.id, user: cal.user.public_uid) unless shop.evaluations.find_by(user_id: cal.user.id, toshop: nil).present? %><br>
           </p>
         </ul>
         <% end %>
