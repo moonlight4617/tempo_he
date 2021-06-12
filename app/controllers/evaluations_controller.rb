@@ -43,7 +43,7 @@ class EvaluationsController < ApplicationController
   end
 
   def like
-    evalution = Evaluation.where(shop_id: params[:id], user_id: current_user.id) || 
+    # evalution = Evaluation.where(shop_id: params[:id], user_id: current_user.id) || 
   end
 
   def dislike
