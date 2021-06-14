@@ -1,0 +1,27 @@
+<div class="container">
+  <h3 class="text-center">お気に入り</h3>
+  <% @favorites.each do |favorite| %>
+  <div class="row my-5">
+    <div class="col-md-4 col-sm-10 mb-2">
+      <%= image_tag favorite.shop.image.url,  class: "img-fluid", size: "330" %>
+    </div>
+    <div class="col-md-5 col-sm-10">
+      <h5><%= favorite.shop.name %></h5>
+      <p><%= favorite.shop.station %>駅</p>
+      <p>基本料金：¥ <%= favorite.shop.price %>/h</p>
+      <p>特徴タグ：<% favorite.shop.tags.each do |tag| %>
+        <span id="tag" class="badge rounded-pill text-white">
+          <%= tag.name %>
+        </span>
+        <% end %>
+      </p>
+    </div>
+    <div class="col-md-3 col-sm-8">
+      <%= link_to "予約する", c_new_path(favorite.shop), id: "show-shop", class: "btn btn-block mt-2" %>
+      <%= link_to "メッセージ ", ch_show_path(favorite.shop), id: "show-shop", class: "btn btn-block mt-2" %>
+      <%= link_to "店舗詳細", s_show_path(favorite.shop), id: "show-shop", class: "btn btn-block mt-2" %>
+    </div>
+  </div>
+  <hr>
+  <% end %>
+</div>

@@ -42,14 +42,6 @@ class EvaluationsController < ApplicationController
     end
   end
 
-  def like
-    # evalution = Evaluation.where(shop_id: params[:id], user_id: current_user.id) || 
-  end
-
-  def dislike
-
-  end
-
   private
     def eva_params
       params.require(:evaluation).permit(:rate, :comment)

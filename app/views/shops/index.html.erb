@@ -84,14 +84,11 @@
               <%= image_tag shop.image.url, id: "shop-thumbnail", class: "img-fluid" %>
               <% end %>
               <div class="card-body">
-                <h5 class="card-title"><%= shop.name %></h5>
-
-                <% if current_user && current_user.liked_by?(shop.id) %>
-                <%= link_to "いいね", e_like_path(shop) %>
-                <% else %>
-                <td>いいね</td>
-                <% end %>
-
+                <h5 class="card-title"><%= shop.name %>
+                  <span id="favorite_<%= shop.id %>">
+                    <%= render 'favorite', shop: shop %>
+                  </span>
+                </h5>
                 <p><%= shop.station %>駅</p>
                 <p>基本料金：¥ <%= shop.price %>/h</p>
                 <p>特徴タグ：<% shop.tags.each do |tag| %>

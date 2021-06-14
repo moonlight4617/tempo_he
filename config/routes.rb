@@ -39,7 +39,7 @@ Rails.application.routes.draw do
   
   # chats
   get 'shops/chats/user_index', to: 'chats#index_for_user', as: 'ch_index_user' 
-  get 'shops/:id/chats/new', to: 'chats#new', as: 'ch_new' 
+  # get 'shops/:id/chats/new', to: 'chats#new', as: 'ch_new' 
   get 'shops/:id/chats/', to: 'chats#show', as: 'ch_show' 
   get 'shops/:id/chats/show_for_ow', to: 'chats#show_for_owner', as: 'ch_show_owner' 
   get 'shops/:id/chats/owner_index', to: 'chats#index_for_owner', as: 'ch_index_owner' 
@@ -63,6 +63,7 @@ Rails.application.routes.draw do
   get 'users/new', to: 'users#new', as: 'u_new'
   get 'users/show', to: 'users#show', as: 'u_show'
   get 'users/show_for_owner', to: 'users#show_for_owner', as: 'u_show_for_owner'
+  get 'users/my_favorite', to: 'users#my_favorite', as: 'u_favorite'
   get 'users/edit', to: 'users#edit', as: 'u_edit'
   get 'users/about', to: 'users#about', as: 'u_about'
   post 'users/new', to: 'users#create', as: 'u_create'
@@ -95,8 +96,10 @@ Rails.application.routes.draw do
   # evaluations
   get 'evaluations/:id/new', to: 'evaluations#new', as: 'e_new'
   post 'evaluations/:id/create', to: 'evaluations#create', as: 'e_create'
-  post 'evaluations/:id/like', to: 'evaluations#like', as: 'e_like'
-  delete 'evaluations/:id/dislike', to: 'evaluations#dislike', as: 'e_dislike'
 
+  # favorite
+  post 'favorite/:id/create', to: 'favorite#create', as: 'f_create'
+  delete 'favorite/:id/destroy', to: 'favorite#destroy', as: 'f_destroy'
+  
   get 'test', to: 'home#test', as: 'test'
 end

@@ -21,6 +21,7 @@
             <%= link_to "マイアカウント", u_show_path, class: "dropdown-item" %>
             <%= link_to "メッセージ", ch_index_user_path, class: "dropdown-item" %>
             <%= link_to "予約一覧", c_index_path, class: "dropdown-item" %>
+            <%= link_to "お気に入り", u_favorite_path, class: "dropdown-item" %>
             <%= link_to "ログアウト", user_logout_path, method: :delete, class: "dropdown-item" %>
             <% else %>
             <%= link_to "ログイン", user_login_path, class: "dropdown-item" %>

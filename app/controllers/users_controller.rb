@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
 
   include UserSessionsHelper
-  before_action :set_user, only: [:show, :edit, :update, :destroy]
+  before_action :set_user, only: [:show, :edit, :update, :destroy, :my_favorite]
   before_action :user_exist?, only: [:show, :edit, :update, :destroy]
 
   def new
@@ -27,18 +27,10 @@ class UsersController < ApplicationController
       @newest_reserve.push(@calendars.where(shop_id: shop).order(:rent_date, :start_time).last)
     end
   end
-
-  # オーナー側が見るユーザープロフィール
-  def show_for_owner
-    @user = User.find_by(public_uid: params[:format])
-    @resevation = @user.calendars.size
-    @evaluations = Evaluation.where(user_id: @user.id, toshop: nil).limit(10)
-    @rate = Evaluation.where(toshop: nil).average(:rate)
-  end
-
+  
   def edit
   end
-
+  
   def update
     if @user.update(user_params)
       flash[:success] = "ユーザー情報が更新されました"
@@ -47,12 +39,24 @@ class UsersController < ApplicationController
       render 'new'
     end
   end
-
+  
   def destroy
     @user.update(del_flg: 1)
     flash[:info] = "ユーザー情報は削除されました"
     log_out
     redirect_to root_path
+  end
+  
+  # オーナー側が見るユーザープロフィール
+  def show_for_owner
+    @user = User.find_by(public_uid: params[:format])
+    @resevation = @user.calendars.size
+    @evaluations = Evaluation.where(user_id: @user.id, toshop: nil).limit(10)
+    @rate = Evaluation.where(toshop: nil).average(:rate)
+  end
+
+  def my_favorite
+    @favorites = @user.favorites.includes(shop: :tags)
   end
 
   private
