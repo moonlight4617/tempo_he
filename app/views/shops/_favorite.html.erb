@@ -1,0 +1,7 @@
+<% if current_user && current_user.liked_by?(shop.id) %>
+<span class="material-icons"><%= link_to 'star', f_destroy_path(shop), method: "delete", remote: true, id: "star" %>
+</span>
+<% elsif current_user %>
+<span class="material-icons"><%= link_to 'star_border', f_create_path(shop), method: "POST", remote: true, id: "star" %>
+</span>
+<% end %>
