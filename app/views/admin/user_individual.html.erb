@@ -9,12 +9,16 @@
       Eメール：<%= @user.email %><br>
       住所：<%= @user.address %><br>
       電話番号：<%= @user.tel %><br>
-      アカウント作成日：<%= l @user.created_at, format: :short %><br>
-      <i class="far fa-star"></i>
-      <i class="far fa-star"></i>
-      <i class="far fa-star"></i><br>
-      <p>口コミ評価：口コミ評価の本文口コミ評価の本文口コミ評価の本文口コミ評価の本文口コミ評価の本文口コミ評価の本文口コミ評価の本文</p>
+      アカウント作成日：<%= l @user.created_at, format: :long %><br>
       <%= link_to "登録情報編集", admin_user_edit_path(@user), class: "btn btn-light mb-4 mt-1" %><br>
+      <p>口コミ評価：
+        <%= @rate if @rate.present? %></p>
+      <% @evaluations.each do |evaluate| %>
+      <ul>
+        <li><%= evaluate.comment %></li>
+      </ul>
+      <% end %>
+      <%= link_to "コメント一覧", admin_user_com_path(@user) if @evaluations.present? %><br>
     </div>
   </div>
   <div class="row">

@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
 
   include UserSessionsHelper
-  before_action :set_user, only: [:show, :edit, :update, :destroy, :my_favorite]
+  before_action :set_user, only: [:show, :edit, :update, :destroy, :my_favorite, :comment]
   before_action :user_exist?, only: [:show, :edit, :update, :destroy]
 
   def new
@@ -26,6 +26,8 @@ class UsersController < ApplicationController
     shop_id.each do |shop|
       @newest_reserve.push(@calendars.where(shop_id: shop).order(:rent_date, :start_time).last)
     end
+    @evaluations = @user.evaluations.limit(3)
+    @rate = @user.evaluations.average(:rate)
   end
   
   def edit
@@ -57,6 +59,10 @@ class UsersController < ApplicationController
 
   def my_favorite
     @favorites = @user.favorites.includes(shop: :tags)
+  end
+
+  def comment
+    @evaluations = @user.evaluations.page(params[:page]).per(50)
   end
 
   private

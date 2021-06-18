@@ -6,11 +6,15 @@
     </div>
     <div class="col-lg-8 col-sm-12">
       <%= @user.name %><br>
-      <i class="far fa-star"></i>
-      <i class="far fa-star"></i>
-      <i class="far fa-star"></i><br>
       Eメール：<%= @user.email %><br>
-      <p>口コミ評価：口コミ評価の本文口コミ評価の本文口コミ評価の本文口コミ評価の本文口コミ評価の本文口コミ評価の本文口コミ評価の本文</p>
+      <p>口コミ評価：
+        <%= @rate %></p>
+      <% @evaluations.each do |evaluate| %>
+      <ul>
+        <li><%= evaluate.comment %></li>
+      </ul>
+      <% end %>
+      <%= link_to "コメント一覧", u_comment_path if @evaluations.present? %>
       <%= link_to "登録情報編集", u_edit_path, class: "btn btn-light mb-4" %><br>
     </div>
   </div>

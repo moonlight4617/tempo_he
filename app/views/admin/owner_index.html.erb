@@ -5,7 +5,7 @@
     ID：<%= owner.id %>
   </li>
   <li>
-    オーナー名：<%= link_to "#{owner.name}", o_show_path(owner) %>
+    オーナー名：<%= link_to "#{owner.name}", admin_owner_ind_path(owner) %>
   </li>
   <li>
     Eメール：<%= owner.email %>
@@ -17,6 +17,7 @@
     <%= link_to "#{shop.name}", admin_shop_path(shop.id) %>
   </li>
   <% end %>
+  <% else %>
   <% end %>
   <hr>
 </ul>
