@@ -7,7 +7,7 @@ class ShopsController < ApplicationController
   include UserSessionsHelper
   
   def index
-    @shops = Shop.all.includes(:tags).page(params[:page]).per(50)
+    @shops = Shop.all.includes(:tags, :favorites).page(params[:page]).per(50)
     @tags = Tag.all
   end
 

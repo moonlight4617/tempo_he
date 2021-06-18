@@ -40,7 +40,7 @@ class User < ApplicationRecord
   end
 
   def liked_by?(shop_id)
-    favorites.where(shop_id: shop_id).exists?
+    favorites.pluck(:shop_id).include?(shop_id)
   end
 
 end

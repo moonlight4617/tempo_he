@@ -8,6 +8,15 @@ class AdminController < ApplicationController
 
   def user_individual
     @user = User.find_puid(params[:format])
+    @calendars = @user.calendars.order(rent_date: "DESC", start_time: "DESC").limit(10).includes(:shop)
+    @evaluations = @user.evaluations.limit(3)
+    @rate = @user.evaluations.average(:rate)
+  end
+
+  def user_comment
+    @user = User.find_puid(params[:format])
+    @evaluations = @user.evaluations.page(params[:page]).per(50)
+    render template: "users/comment"
   end
 
   def user_edit
@@ -20,7 +29,7 @@ class AdminController < ApplicationController
       flash[:success] = "ユーザー情報が更新されました"
       redirect_to admin_user_ind_path(@user)
     else
-      render 'user_edit'
+      render "user_edit"
     end
   end
 
@@ -33,7 +42,13 @@ class AdminController < ApplicationController
   end
 
   def owner_index
-    @owners = Owner.all
+    @owners = Owner.all.includes(:shops)
+  end
+
+  def owner_individual
+    @owner = Owner.find(params[:format])
+    @shops = @owner.shops.includes(:calendars)
+    render template: "owners/show"
   end
 
   def shop_show
