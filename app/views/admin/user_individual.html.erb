@@ -9,7 +9,7 @@
       Eメール：<%= @user.email %><br>
       住所：<%= @user.address %><br>
       電話番号：<%= @user.tel %><br>
-      アカウント作成日：<%= @user.created_at %><br>
+      アカウント作成日：<%= l @user.created_at, format: :short %><br>
       <i class="far fa-star"></i>
       <i class="far fa-star"></i>
       <i class="far fa-star"></i><br>
@@ -20,9 +20,9 @@
   <div class="row">
     <div class="col-lg-6 col-sm-12">
       <h2>予約</h2>
-      <% if @user.calendars.present? %>
+      <% if @calendars.present? %>
       <ul>
-        <% @user.calendars.each do |calendar| %>
+        <% @calendars.each do |calendar| %>
         <li>日付：<%= calendar.rent_date %></li>
         <li>時間：<%= calendar.start_time %></li>
         <li>店名：<%= calendar.shop.name %></li>

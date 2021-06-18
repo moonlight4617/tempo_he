@@ -8,6 +8,7 @@ class AdminController < ApplicationController
 
   def user_individual
     @user = User.find_puid(params[:format])
+    @calendars = @user.calendars.includes(:shop)
   end
 
   def user_edit
