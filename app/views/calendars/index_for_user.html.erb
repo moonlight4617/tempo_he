@@ -1,10 +1,35 @@
-<h3>予約日時</h3>
-
-<% @calendars.each.with_index do |cal, i| %>
-<p>予約<%= i + 1 %></p>
-<ul>
-  <li>店舗：<%= link_to cal.shop.name, s_show_path(cal.shop)%></li>
-  <li>日付：<%= cal.rent_date %></li>
-  <li>開始時刻：<%= cal.start_time %></li>
-</ul>
-<% end %>
+<div class="container">
+  <h3 class="text-center">予約日時</h3>
+  <div class="row">
+    <div class="col-lg-6 col-sm-12">
+      <h5>今後の予約</h5>
+      <% if @future_reservations.present? %>
+      <% @future_reservations.each.with_index do |cal, i| %>
+      <p>予約<%= i + 1 %></p>
+      <ul>
+        <li>店舗：<%= link_to cal.shop.name, s_show_path(cal.shop)%></li>
+        <li>日付：<%= cal.rent_date %></li>
+        <li>開始時刻：<%= cal.start_time %></li>
+      </ul>
+      <% end %>
+      <% else %>
+      <p>＜予約はありません＞</p>
+      <% end %>
+    </div>
+    <div class="col-lg-6 col-sm-12">
+      <h5>過去の予約</h5>
+      <% if @past_reservations.present? %>
+      <% @past_reservations.each.with_index do |cal, i| %>
+      <p>予約<%= i + 1 %></p>
+      <ul>
+        <li>店舗：<%= link_to cal.shop.name, s_show_path(cal.shop)%></li>
+        <li>日付：<%= cal.rent_date %></li>
+        <li>開始時刻：<%= cal.start_time %></li>
+      </ul>
+      <% end %>
+      <% else %>
+      <p>＜予約はありません＞</p>
+      <% end %>
+    </div>
+  </div>
+</div>

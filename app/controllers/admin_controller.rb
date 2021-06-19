@@ -1,26 +1,31 @@
 class AdminController < ApplicationController
 
   before_action :correct_administrator
+  before_action :set_user, only: [:user_individual, :user_comment, :user_reservation, :user_edit, :user_destroy]
+  before_action :set_shop, only: [:shop_show, :shop_edit, :shop_update]
 
   def user_index
     @users = User.all
   end
 
   def user_individual
-    @user = User.find_puid(params[:format])
     @calendars = @user.calendars.order(rent_date: "DESC", start_time: "DESC").limit(10).includes(:shop)
     @evaluations = @user.evaluations.limit(3)
     @rate = @user.evaluations.average(:rate)
   end
 
   def user_comment
-    @user = User.find_puid(params[:format])
     @evaluations = @user.evaluations.page(params[:page]).per(50)
     render template: "users/comment"
   end
 
+  def user_reservation
+    @future_reservations = Calendar.where(user_id: @user.id, rent_date: Date.today..Float::INFINITY)
+    @past_reservations = Calendar.where(user_id: @user.id, rent_date: -::Float::INFINITY...Date.today)
+    render template: "calendars/index_for_user"
+  end
+
   def user_edit
-    @user = User.find_puid(params[:format])
   end
 
   def user_update
@@ -34,7 +39,6 @@ class AdminController < ApplicationController
   end
 
   def user_destroy
-    @user = User.find_puid(params[:format])
     @user.del_flg = 1
     @user.save
     flash[:success] = "ユーザーが削除されました"
@@ -52,16 +56,13 @@ class AdminController < ApplicationController
   end
 
   def shop_show
-    @shop = Shop.find(params[:id])
     @tags = @shop.tags
   end
 
   def shop_edit
-    @shop = Shop.find(params[:id])
   end
 
   def shop_update
-    @shop = Shop.find(params[:id])
     set_business_time
     if @shop.update(shop_params) && params[:shop][:tags]
       params[:shop][:tags].each do |tag|
@@ -85,6 +86,14 @@ class AdminController < ApplicationController
         flash[:danger] = "管理者権限がありません"
         redirect_to root_path
       end
+    end
+
+    def set_user
+      @user = User.find_puid(params[:format])
+    end
+
+    def set_shop
+      @shop = Shop.find(params[:id])
     end
 
     def user_params

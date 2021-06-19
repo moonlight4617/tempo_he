@@ -32,6 +32,7 @@
         <li>店名：<%= calendar.shop.name %></li>
         <hr>
         <% end %>
+        <%= link_to "予約一覧", admin_user_res_path(@user) %>
         <% else %>
         <p>予約した店舗はありません</p>
       </ul>

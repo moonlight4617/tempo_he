@@ -84,11 +84,23 @@
               <%= image_tag shop.image.url, id: "shop-thumbnail", class: "img-fluid" %>
               <% end %>
               <div class="card-body">
-                <h5 class="card-title"><%= shop.name %>
+                <h5 class="card-title icon"><%= shop.name %>
                   <span id="favorite_<%= shop.id %>">
                     <%= render 'favorite', shop: shop %>
                   </span>
                 </h5>
+                <p>
+                <div class="icon">
+                  <span class="material-icons">
+                    star_border
+                  </span>
+                  <% if shop.evaluations.present? %>
+                  <%= shop.evaluations.average(:rate)%>
+                  <% else %>
+                  未評価
+                  <% end %>
+                  </p>
+                </div>
                 <p><%= shop.station %>駅</p>
                 <p>基本料金：¥ <%= shop.price %>/h</p>
                 <p>特徴タグ：<% shop.tags.each do |tag| %>

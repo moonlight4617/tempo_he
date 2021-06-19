@@ -4,7 +4,8 @@ before_action :set_shop, except: :index_for_user
 
   # ユーザーに対して、今している予約一覧の表示
   def index_for_user
-    @calendars = Calendar.where(user_id: session[:user_id])
+    @future_reservations = Calendar.where(user_id: session[:user_id], rent_date: Date.today..Float::INFINITY)
+    @past_reservations = Calendar.where(user_id: session[:user_id], rent_date: -::Float::INFINITY...Date.today)
   end
 
   # ユーザーが予約する際の表示

@@ -84,6 +84,7 @@ Rails.application.routes.draw do
   get 'admin/user_index', to: 'admin#user_index', as: 'admin_user'
   get 'admin/user_individual', to: 'admin#user_individual', as: 'admin_user_ind'
   get 'admin/user_comment', to: 'admin#user_comment', as: 'admin_user_com'
+  get 'admin/user_reservation', to: 'admin#user_reservation', as: 'admin_user_res'
   get 'admin/user_edit', to: 'admin#user_edit', as: 'admin_user_edit'
   patch 'admin/user_update', to: 'admin#user_update', as: 'admin_user_update'
   patch 'admin/user_destroy', to: 'admin#user_destroy', as: 'admin_user_destroy'
